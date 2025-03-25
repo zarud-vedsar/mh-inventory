@@ -1,19 +1,16 @@
-<!-- <div id="global-loader">
-		<div class="whirly-loader"> </div>
-	</div> -->
-<!-- Header -->
-<div class="header">
+	<!-- Header -->
+    <div class="header">
 			<div class="main-header">
 				<!-- Logo -->
 				<div class="header-left active">
 					<a href="index.php" class="logo logo-normal">
-						<img src="assets/img/mh-logo.jpeg" alt="Img" style="height: 60px; width: 60px;">
+						<img src="assets/img/mh-logo.jpeg" alt="Img" class="id-img-logo">
 					</a>
 					<a href="index.php" class="logo logo-white">
-						<img src="assets/img/mh-logo.jpeg" alt="Img">
+						<img src="assets/img/mh-logo.jpeg" alt="Img" class="id-img-logo">
 					</a>
 					<a href="index.php" class="logo-small">
-						<img src="assets/img/mh-logo.jpeg" alt="Img">
+						<img src="assets/img/mh-logo.jpeg" alt="Img" class="id-img-logo">
 					</a>
 				</div>
 				<!-- /Logo -->
@@ -362,3 +359,4 @@
 			</div>
 		</div>
 		<!-- /Header -->
+        <div class="main-wrapper">

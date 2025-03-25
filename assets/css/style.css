@@ -8024,7 +8024,7 @@ table .edit-delete-action {
   -webkit-box-align: center;
   -ms-flex-align: center;
   justify-content: center;
-  -webkit-justify-content: center;
+  -webkit-justify-content: start;
   -ms-flex-pack: center;
 }
 table .edit-delete-action a {
@@ -15017,7 +15017,8 @@ svg.feather {
   line-height: 0;
 }
 .header .header-left .logo img {
-  width: 130px;
+  height: 60px;
+  width: 60px;
 }
 @media (max-width: 991.96px) {
   .header .header-left .logo {
@@ -17048,7 +17049,8 @@ body.mini-sidebar.expand-menu .sidebar .sidebar-menu > ul > li.submenu-open ul l
   border-bottom: 1px solid #E6EAED;
 }
 .sidebar .sidebar-logo .logo img {
-  width: 130px;
+height: 60px;
+width: 60px;
 }
 .sidebar .sidebar-logo .logo-small {
   display: none;

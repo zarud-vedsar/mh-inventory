@@ -13,11 +13,11 @@ require_once('./common/sidebar.php');
 					</div>
 					
 				</div>
-
-				
-				
 			</div>
-			
+			<div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
+				<p class="fs-13 text-gray-9 mb-0"><span id="year"></span> &copy; All Right Reserved</p>
+				<p>Designed & Developed By <a href="https://vedsar.com/" class="link-primary">Vedsar India Pvt Ltd</a></p>
+			</div>
 		</div>
 
 

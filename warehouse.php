@@ -4,12 +4,14 @@ require_once('./common/header.php');
 require_once('./common/sidebar.php');
 ?>
 
+
+
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4>Warehouses</h4>
+                    <h4>Warehouse</h4>
                 </div>
             </div>
             <div class="page-btn">
@@ -64,10 +66,10 @@ require_once('./common/sidebar.php');
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="me-2 p-2" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#edit-warehouse">
-                                            <i data-feather="edit" class="feather-edit"></i>
+                                            <i data-feather="edit" class="feather-edit text-warning"></i>
                                         </a>
                                         <a class="p-2" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete-modal">
-                                            <i data-feather="trash-2" class="feather-trash-2"></i>
+                                            <i data-feather="trash-2" class="feather-trash-2 text-danger"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -81,6 +83,10 @@ require_once('./common/sidebar.php');
         <!-- /product list -->
 
     </div>
+    <div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
+				<p class="fs-13 text-gray-9 mb-0"><span id="year"></span> &copy; All Right Reserved</p>
+				<p>Designed & Developed By <a href="https://vedsar.com/" class="link-primary">Vedsar India Pvt Ltd</a></p>
+			</div>
 
 </div>
 
@@ -96,7 +102,7 @@ require_once('./common/sidebar.php');
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="https://dreamspos.dreamstechnologies.com/html/template/warehouse.html">
+            <form action="#">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -105,232 +111,69 @@ require_once('./common/sidebar.php');
                                 <input type="text" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Contact Person <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option>Steven</option>
-                                    <option>Gravely</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone(Work)</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Address <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">City <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option>Varrel</option>
-                                    <option>Los Angels</option>
-                                    <option>Munich</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">State <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option>Bavaria</option>
-                                    <option>New York City</option>
-                                    <option>California</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">Country <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option>Germany</option>
-                                    <option>Mexico</option>
-                                    <option>United States</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Postal Code <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="mb-0">
-                                <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
-                                    <span class="status-label">Status</span>
-                                    <input type="checkbox" id="users5" class="check" checked>
-                                    <label for="users5" class="checktoggle mb-0"></label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add Warehouse</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<!-- Edit Warehouse -->
-<div class="modal fade" id="edit-warehouse">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="page-title">
-                    <h4>Edit Warehouse</h4>
-                </div>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="https://dreamspos.dreamstechnologies.com/html/template/warehouse.html">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Warehouse <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" value="Lavish Warehouse">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Contact Person <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option selected>Steven</option>
-                                    <option>Gravely</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" value="electromart@example.com">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" value="+12498345785">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone(Work)</label>
-                                <input type="text" class="form-control" value="+17538647943">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Address <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" value="46 Perry Street">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">City <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option selected>Varrel</option>
-                                    <option>Los Angels</option>
-                                    <option>Munich</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">State <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option selected>Bavaria</option>
-                                    <option>New York City</option>
-                                    <option>California</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-10 col-10">
-                            <div class="mb-3">
-                                <label class="form-label">Country <span class="text-danger">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option selected>Germany</option>
-                                    <option>Mexico</option>
-                                    <option>United States</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Postal Code <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" value="10176">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="mb-0">
-                                <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
-                                    <span class="status-label">Status</span>
-                                    <input type="checkbox" id="users6" class="check" checked>
-                                    <label for="users6" class="checktoggle mb-0"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- /Edit Warehouse -->
-
-<!-- Delete Modal -->
-<div class="modal fade" id="delete-modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content p-5">
-            <div class="modal-body text-center p-0">
-                <span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i class="ti ti-trash fs-24 text-danger"></i></span>
-                <h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Warehouse</h4>
-                <p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete warehouse?</p>
-                <div class="d-flex justify-content-center mt-3">
-                    <a class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none" data-bs-dismiss="modal">Cancel</a>
-                    <a href="warehouse.html" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /Delete Modal -->
 <!-- /Add Warehouse -->
+
+
+		<!-- Edit Warehouse -->
+		<div class="modal fade" id="edit-warehouse">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="page-title">
+							<h4>Edit Warehouse</h4>
+						</div>
+						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="#">
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="mb-3">
+										<label class="form-label">Warehouse <span class="text-danger">*</span></label>
+										<input type="text" class="form-control" value="Lavish Warehouse">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /Edit Warehouse -->
+
+		<!-- Delete Modal -->
+		<div class="modal fade" id="delete-modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content p-5">
+					<div class="modal-body text-center p-0">
+						<span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i class="ti ti-trash fs-24 text-danger"></i></span>
+						<h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Warehouse</h4>
+						<p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete warehouse?</p>	
+						<div class="d-flex justify-content-center mt-3">
+							<a class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none" data-bs-dismiss="modal">Cancel</a>
+							<a href="warehouse.html" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes Delete</a>
+						</div>											
+					</div>					
+				</div>
+			</div>
+		</div>
+		<!-- /Delete Modal -->
 
 <?php
 require_once('./common/footer.php');
