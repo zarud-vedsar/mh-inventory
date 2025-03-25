@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-layout-mode="light_mode">
 
-
-<!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Mar 2025 12:20:21 GMT -->
 <head>
-
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,10 +44,10 @@
 
 	<!-- Color Picker Css -->
 	<link rel="stylesheet" href="assets/plugins/%40simonwep/pickr/themes/nano.min.css">
+    <!-- Bootstrap CSS -->
 
+    
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="assets/css/style.css">
-
 </head>
-
 <body>

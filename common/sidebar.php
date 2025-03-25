@@ -16,7 +16,7 @@
 									<a href="index.php" class="active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Dashboard</span></a>
 								</li>
 								<li >
-									<a href="index.php" class="active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Dashboard</span></a>
+									<a href="warehouse.php" class="active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Warehouse</span></a>
 								</li>
 								
 							</ul>
