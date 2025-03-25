@@ -83,6 +83,14 @@
 									<a href="warehouse.php" class=""><i class="ti ti-archive fs-16 me-2"></i><span>Warehouse</span></a>
 								</li>
 							</ul>
+							<ul>
+								<li class="submenu">
+									<a href="javascript:void(0);" class="subdrop active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Product Management</span><span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="./product-add.php" class="active">Add Product</a></li>
+										<li><a href="./product-list.php">Product List</a></li>
+									</ul>
+								</li>
 						</li>
 						
 					</ul>

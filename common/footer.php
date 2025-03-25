@@ -33,6 +33,8 @@
 <!-- Custom JS -->
 <script src="assets/js/theme-colorpicker.js"></script>
 <script src="assets/js/script.js" ></script>
+<!-- Summernote JS -->
+<script src="assets/plugins/summernote/summernote-bs4.min.js" type="88f18f101269c486c4aca05b-text/javascript"></script>
 
 <script>
 

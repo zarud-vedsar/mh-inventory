@@ -48,5 +48,8 @@
 
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="assets/css/style.css">
+
+		<!-- Summernote CSS -->
+		<link rel="stylesheet" href="assets/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body>
