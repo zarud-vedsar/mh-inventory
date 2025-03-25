@@ -21,6 +21,9 @@ require_once('./common/sidebar.php');
                     <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i class="ti ti-chevron-up"></i></a>
                 </li>
             </ul>
+            <div class="page-btn">
+                <a href="./product-list.php" class="btn btn-primary"><i class="fa-solid fa-list-ul me-1"></i></i>Product List</a>
+            </div>
             <div class="page-btn mt-0">
                 <a href="product-list.html" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
             </div>
@@ -99,9 +102,9 @@ require_once('./common/sidebar.php');
                                     </div>
                                 </div>
 
-                                
-                              
-                                
+
+
+
                                 <!-- Editor -->
                                 <div class="col-lg-12">
                                     <div class="summer-description-box">
@@ -114,9 +117,9 @@ require_once('./common/sidebar.php');
                             </div>
                         </div>
                     </div>
-                   
-                   
-                    
+
+
+
                 </div>
             </div>
             <div class="col-lg-12">
@@ -132,6 +135,25 @@ require_once('./common/sidebar.php');
         <p>Designed &amp; Developed by <a href="javascript:void(0);" class="text-primary">Dreams</a></p>
     </div>
 </div>
+
+<div class="modal fade" id="delete-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="page-wrapper-new p-0">
+                <div class="content p-5 px-3 text-center">
+                    <span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i class="ti ti-trash fs-24 text-danger"></i></span>
+                    <h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Product</h4>
+                    <p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete product?</p>
+                    <div class="modal-footer-btn mt-3 d-flex justify-content-center">
+                        <button type="button" class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php
 require_once('./common/footer.php');

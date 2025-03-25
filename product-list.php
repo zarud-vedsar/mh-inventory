@@ -28,7 +28,7 @@ require_once('./common/sidebar.php');
 							</li>
 						</ul>
 						<div class="page-btn">
-							<a href="add-product.html" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add Product</a>
+							<a href="./product-add.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add Product</a>
 						</div>	
 						<div class="page-btn import">
 							<a href="#" class="btn btn-secondary color" data-bs-toggle="modal" data-bs-target="#view-notes"><i
