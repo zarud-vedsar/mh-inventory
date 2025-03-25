@@ -4,8 +4,6 @@ require_once('./common/header.php');
 require_once('./common/sidebar.php');
 ?>
 
-
-
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
@@ -24,21 +22,6 @@ require_once('./common/sidebar.php');
                 <div class="search-set">
                     <div class="search-input">
                         <span class="btn-searchset"><i class="ti ti-search fs-14 feather-search"></i></span>
-                    </div>
-                </div>
-                <div class="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                            Status
-                        </a>
-                        <ul class="dropdown-menu  dropdown-menu-end p-3">
-                            <li>
-                                <a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -92,7 +75,7 @@ require_once('./common/sidebar.php');
 
 <!-- Add Warehouse -->
 <div class="modal fade" id="add-warehouse">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="page-title">
@@ -126,7 +109,7 @@ require_once('./common/sidebar.php');
 
 		<!-- Edit Warehouse -->
 		<div class="modal fade" id="edit-warehouse">
-			<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<div class="page-title">
@@ -159,7 +142,7 @@ require_once('./common/sidebar.php');
 
 		<!-- Delete Modal -->
 		<div class="modal fade" id="delete-modal">
-			<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-dialog">
 				<div class="modal-content p-5">
 					<div class="modal-body text-center p-0">
 						<span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i class="ti ti-trash fs-24 text-danger"></i></span>

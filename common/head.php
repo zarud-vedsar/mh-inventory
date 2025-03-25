@@ -46,7 +46,6 @@
 	<link rel="stylesheet" href="assets/plugins/%40simonwep/pickr/themes/nano.min.css">
     <!-- Bootstrap CSS -->
 
-    
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>

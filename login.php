@@ -57,7 +57,7 @@
                                     <h4>Access the panel using your email and passcode.</h4>
                                 </div>
                                 <div class="mb-3">
-                                        <label class="form-label">Email</label>
+                                        <label class="form-label">Email <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="text" value="" class="form-control border-end-0">
                                             <span class="input-group-text border-start-0">
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Password</label>
+                                        <label class="form-label">Password <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" class="pass-input form-control">
                                             <span class="ti toggle-password ti-eye-off text-gray-9"></span>
