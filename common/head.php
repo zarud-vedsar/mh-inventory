@@ -12,7 +12,7 @@
 	<meta name="robots" content="index, follow">
 	<title>Dreams POS - Inventory Management & Admin Dashboard Template</title>
 
-	<script src="assets/js/theme-script.js" type="75609a56d6118f4e48ec36dc-text/javascript"></script>	
+	<script src="assets/js/theme-script.js" type="75609a56d6118f4e48ec36dc-text/javascript"></script>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -44,12 +44,19 @@
 
 	<!-- Color Picker Css -->
 	<link rel="stylesheet" href="assets/plugins/%40simonwep/pickr/themes/nano.min.css">
-    <!-- Bootstrap CSS -->
+	<!-- Bootstrap CSS -->
 
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="assets/css/style.css">
 
-		<!-- Summernote CSS -->
-		<link rel="stylesheet" href="assets/plugins/summernote/summernote-bs4.min.css">
+	<!-- Summernote CSS -->
+	<link rel="stylesheet" href="assets/plugins/summernote/summernote-bs4.min.css">
+
+	<!-- Select2 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+	<!-- font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css" integrity="sha512-DzC7h7+bDlpXPDQsX/0fShhf1dLxXlHuhPBkBo/5wJWRoTU6YL7moeiNoej6q3wh5ti78C57Tu1JwTNlcgHSjg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
