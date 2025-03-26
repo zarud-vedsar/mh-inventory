@@ -85,10 +85,24 @@
 							</ul>
 							<ul>
 								<li class="submenu">
-									<a href="javascript:void(0);" class="subdrop active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Product Management</span><span class="menu-arrow"></span></a>
+									<a href="javascript:void(0);" class="subdrop active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Item Management</span><span class="menu-arrow"></span></a>
 									<ul>
-										<li><a href="./product-add.php" class="active">Add Product</a></li>
-										<li><a href="./product-list.php">Product List</a></li>
+										<li><a href="./product-add.php" class="active">Add Item</a></li>
+										<li><a href="./product-list.php">Item List</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);" class="subdrop active"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Party Management</span><span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="./party-add.php" class="active">Add Party</a></li>
+										<li><a href="./party-list.php">Party List</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);" class="subdrop active"><i class="ti ti-layout-grid fs-16 me-2"></i><span> Order Management</span><span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="./pending-orders.php" class="active">Pending Orders</a></li>
+										<li><a href="./pending-order-list.php">Pending Order List</a></li>
 									</ul>
 								</li>
 						</li>

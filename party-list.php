@@ -10,8 +10,8 @@ require_once('./common/sidebar.php');
 		<div class="page-header">
 			<div class="add-item d-flex">
 				<div class="page-title">
-					<h4 class="fw-bold">Item List</h4>
-					<h6>Manage your items</h6>
+					<h4 class="fw-bold">Party List</h4>
+					<h6>Manage your parties</h6>
 				</div>
 			</div>
 			<ul class="table-top-head">
@@ -23,7 +23,7 @@ require_once('./common/sidebar.php');
 			<div class="am-page-upr-btn">
 				<div class="left-btn">
 					<div class="page-btn">
-						<a href="./product-add.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add Item</a>
+						<a href="./party-add.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add Party</a>
 					</div>
 					<div class="page-btn">
 						<a href="#" class="btn btn-info">
@@ -55,40 +55,31 @@ require_once('./common/sidebar.php');
 							<tr>
 
 								<th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Item Name <img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon">
+								<th> Name <img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon">
 								</th>
-								<th>Print Name<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Kgs/Qty<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Alternate Qty<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Coupon Point<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Warehouse<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th>Remark</th>
+								<th> Phone Number<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
+								<th> Address</th>
 								<th class="no-sort">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-
 							<tr>
 
-								<td>2 </td>
+								<td>1 </td>
 								<td>
-									TESt1
+									Lenovo IdeaPad
 								</td>
-								<td>Computers</td>
-								<td>24</td>
-								<td>$600</td>
-								<td>Zero</td>
-								<td>Lucknow</td>
+								<td>1234567890</td>
+
 								<td>
 									<div class="am-text-container">
-										Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident aperiam cum minus commodi? Neque, numquam totam. Vel est ea blanditiis, optio eaque exercitationem consequuntur quisquam! Possimus hic quas illo tenetur.
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, tenetur.
 									</div>
-									<button class="am-see-more-btn" onclick="toggleText(this)">See More</button>
 								</td>
 								<td class="action-table-data">
 									<div class="edit-delete-action">
 
-										<a class="me-2 p-2" href="./product-add.php">
+										<a class="me-2 p-2" href="./party-add.php">
 											<i data-feather="edit" class="feather-edit text-info"></i>
 										</a>
 										<a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2" href="javascript:void(0);">
@@ -101,23 +92,19 @@ require_once('./common/sidebar.php');
 
 								<td>1 </td>
 								<td>
-									TESt1
+									Lenovo IdeaPad
 								</td>
-								<td>Computers</td>
-								<td>24</td>
-								<td>$600</td>
-								<td>Zero</td>
-								<td>Lucknow</td>
+								<td>1234567890</td>
+
 								<td>
 									<div class="am-text-container">
-										Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident aperiam cum minus commodi? Neque, numquam totam. Vel est ea blanditiis, optio eaque exercitationem consequuntur quisquam! Possimus hic quas illo tenetur.
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, tenetur.
 									</div>
-									<button class="am-see-more-btn" onclick="toggleText(this)">See More</button>
 								</td>
 								<td class="action-table-data">
 									<div class="edit-delete-action">
 
-										<a class="me-2 p-2" href="./product-add.php">
+										<a class="me-2 p-2" href="./party-add.php">
 											<i data-feather="edit" class="feather-edit text-info"></i>
 										</a>
 										<a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2" href="javascript:void(0);">
@@ -139,6 +126,8 @@ require_once('./common/sidebar.php');
 	</div>
 
 </div>
+
+
 
 <?php
 require_once('./common/footer.php');
