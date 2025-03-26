@@ -9,8 +9,8 @@ require_once('./common/sidebar.php');
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4 class="fw-bold">Add Product</h4>
-                    <h6>Add new product</h6>
+                    <h4 class="fw-bold">Item</h4>
+                    <h6>Add New Item</h6>
                 </div>
             </div>
             <ul class="table-top-head">
@@ -22,7 +22,7 @@ require_once('./common/sidebar.php');
                 </li>
             </ul>
             <div class="page-btn">
-                <a href="./product-list.php" class="btn btn-primary"><i class="fa-solid fa-list-ul me-1"></i></i>Product List</a>
+                <a href="./product-list.php" class="btn btn-primary"><i class="fa-solid fa-list-ul me-1"></i></i>Item List</a>
             </div>
             <div class="page-btn mt-0">
                 <a href="product-list.html" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
