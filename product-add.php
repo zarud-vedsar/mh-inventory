@@ -76,11 +76,11 @@ require_once('./common/sidebar.php');
                                 <div class="col-sm-4 col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Coupon Point<span class="text-danger ms-1">*</span></label>
-                                        <select class="select2 ">
+                                        <select class="select2 am-select2">
                                             <option value="">Select </option>
-                                            <option value="0">Zero</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
 
                                         </select>
                                     </div>
@@ -88,7 +88,7 @@ require_once('./common/sidebar.php');
                                 <div class="col-sm-4 col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Warehouse<span class="text-danger ms-1">*</span></label>
-                                        <select class="select2 form-select">
+                                        <select class="select2 ">
                                             <option>Select</option>
                                             <option>Lavish Warehouse</option>
                                             <option>Quaint Warehouse</option>

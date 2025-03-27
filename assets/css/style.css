@@ -55466,3 +55466,26 @@ span.flatpickr-weekday {
 
   }
 }
+
+/* Style for the Select2 input field */
+.select2-container .select2-selection--single {
+  background-color: #fff !important;
+  border: 1px solid #E6EAED !important;
+  border-radius: 4px !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  color: #212B36 !important;
+}
+
+/* Style for the dropdown items */
+.select2-container .select2-dropdown {
+  background-color: #fff !important; /* Optional: you can also change the background of the dropdown */
+  border: 1px solid #E6EAED !important;
+  border-radius: 4px !important;
+}
+
+/* Style for the selected option */
+.select2-container .select2-selection__rendered {
+  line-height: 38px !important;
+  color: #212B36 !important;
+}

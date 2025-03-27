@@ -165,7 +165,7 @@ require_once('./common/sidebar.php');
                                     <div class="col-sm-4 col-12">
                                         <div class="mb-3">
                                             <label class="form-label"> Party<span class="text-danger ms-1">*</span></label>
-                                            <select class="select2 ">
+                                            <select class="select2">
                                                 <option>Select</option>
                                                 <option>Code 128</option>
                                                 <option>Code 39</option>
