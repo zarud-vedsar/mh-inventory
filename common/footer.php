@@ -40,7 +40,12 @@
 <!-- Select 2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-
+<script src="./assets/js/custom/sweetalert.js"></script>
+<!-- for sweetalert modal confirmation cancel or ok  -->
+<script src="./assets/js/custom/sweetalert-function.min.js"></script>
+<!-- custom function  -->
+<script src="./assets/js/custom/function.js"></script>
+<script src="./assets/js/custom/style.js"></script>
 <script>
     // Get the current year
     const currentYear = new Date().getFullYear();
@@ -48,12 +53,6 @@
     // Set the current year in the element with id 'year'
     document.getElementById('year').textContent = currentYear;
 </script>
-<!-- <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="1016084230f6eaf9835678a4-|49" defer></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9245a541ae245519","version":"2025.1.0","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}' crossorigin="anonymous"></script> -->
-
-
 </body>
-
-
-<!-- Mirrored from dreamspos.dreamstechnologies.com/html/template/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Mar 2025 12:21:51 GMT -->
 
 </html>
