@@ -46,13 +46,6 @@
 <!-- custom function  -->
 <script src="./assets/js/custom/function.js"></script>
 <script src="./assets/js/custom/style.js"></script>
-<script>
-    // Get the current year
-    const currentYear = new Date().getFullYear();
-
-    // Set the current year in the element with id 'year'
-    document.getElementById('year').textContent = currentYear;
-</script>
 </body>
 
 </html>

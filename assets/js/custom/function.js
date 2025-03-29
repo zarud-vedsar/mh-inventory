@@ -163,7 +163,7 @@ function load_pagination(
     let page_id = $(this).attr("id");
     show_spinner(table_id);
     custom = custom;
-    if(forSupport){custom = $("#attdmonthly").val();}
+    if (forSupport) { custom = $("#attdmonthly").val(); }
     custom2 = custom2;
     loadTable(page_id, table_id, funName, custom, custom2);
   });
@@ -228,7 +228,7 @@ function check_status(button_class, table_name_tb) {
 }
 
 
-function check_status1(button_class, table_name_tb,type) {
+function check_status1(button_class, table_name_tb, type) {
   $(document).on("click", button_class, function () {
     if ($(this).prop("checked") == true) {
       let active = $(this).data("checkid");
@@ -237,7 +237,7 @@ function check_status1(button_class, table_name_tb,type) {
       $.ajax({
         url: path_set,
         type: "POST",
-        data: { active: active, table_name: table_name, data: check_status,type:type},
+        data: { active: active, table_name: table_name, data: check_status, type: type },
         success: function (data) {
           let json11 = JSON.parse(data);
           if (json11.status == 1) {
@@ -276,7 +276,7 @@ function check_status1(button_class, table_name_tb,type) {
 function show_delete(del_id, this_btn, table_name) {
   swal({
     title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this data!",
+    text: "want to delete this data",
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -294,19 +294,19 @@ function show_delete(del_id, this_btn, table_name) {
             swaMsg("success", "Data deleted successfully.", "#0F843F");
             if ($(this_btn).hasClass("delete-banner") || $(this_btn).hasClass("delete-gallery")) {
               $(this_btn).closest(".col-md-3").remove();
-            } 
-            else if ($(this_btn).hasClass("delete-faq") ) {
+            }
+            else if ($(this_btn).hasClass("delete-faq")) {
               $(this_btn).closest(".col-md-12").remove();
             }
             else if ($(this_btn).hasClass("delete-blend") || $(this_btn).hasClass("delete-leadcategory") || $(this_btn).hasClass("delete-packagingcategory")) {
               $(this_btn).closest(".col-md-4").remove();
-            } 
-            else if ($(this_btn).hasClass("delete-menu") ) {
+            }
+            else if ($(this_btn).hasClass("delete-menu")) {
               $(this_btn).closest(".dd-item").remove();
-            } 
-              else {
-               $(this_btn).closest("tr").remove();
-             }
+            }
+            else {
+              $(this_btn).closest("tr").remove();
+            }
           } else if (json7.status == 2) {
             swaMsg("error", json7.msg, "#a90228");
           }
@@ -351,19 +351,19 @@ function show_recycle(del_id, this_btn, table_name) {
             swaMsg("success", "Data recovered successfully.", "#0F843F");
             if ($(this_btn).hasClass("delete-banner") || $(this_btn).hasClass("delete-gallery")) {
               $(this_btn).closest(".col-md-3").remove();
-            } 
-            else if ($(this_btn).hasClass("delete-faq") ) {
+            }
+            else if ($(this_btn).hasClass("delete-faq")) {
               $(this_btn).closest(".col-md-12").remove();
-            } 
+            }
             else if ($(this_btn).hasClass("delete-blend") || $(this_btn).hasClass("delete-packagingcategory")) {
               $(this_btn).closest(".col-md-4").remove();
-            } 
-            else if ($(this_btn).hasClass("delete-menu") ) {
+            }
+            else if ($(this_btn).hasClass("delete-menu")) {
               $(this_btn).closest(".dd-item").remove();
-            } 
-              else {
-               $(this_btn).closest("tr").remove();
-             }
+            }
+            else {
+              $(this_btn).closest("tr").remove();
+            }
           } else if (json7.status == 2) {
             swaMsg("error", json7.msg, "#a90228");
           }

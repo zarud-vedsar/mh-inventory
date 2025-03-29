@@ -2,9 +2,8 @@
 require_once('./common/head.php');
 require_once('./common/header.php');
 require_once('./common/sidebar.php');
+$recycle = $action->db->validateGetData('recycle') ?: null;
 ?>
-
-
 <div class="page-wrapper">
 	<div class="content">
 		<div class="page-header">
@@ -17,19 +16,28 @@ require_once('./common/sidebar.php');
 			<ul class="table-top-head">
 
 				<li>
-					<a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i class="ti ti-chevron-up"></i></a>
+					<a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
+							class="ti ti-chevron-up"></i></a>
 				</li>
 			</ul>
 			<div class="am-page-upr-btn">
 				<div class="left-btn">
 					<div class="page-btn">
-						<a href="./party-add.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add Party</a>
+						<a href="./party-add.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add
+							Party</a>
 					</div>
 					<div class="page-btn">
-						<a href="#" class="btn btn-info">
-							<i class="ti ti-reload"></i>
-
-							 Recycle Bin</a>
+						<?php if ($recycle) { ?>
+							<a href="./party-list.php" class="btn btn-secondary">
+								<i data-feather="eye-off"></i>
+								Hide Recycle Bin
+							</a>
+						<?php } else { ?>
+							<a href="./party-list.php?recycle=true" class="btn btn-danger">
+								<i data-feather="trash-2"></i>
+								Show Recycle Bin
+							</a>
+						<?php } ?>
 					</div>
 				</div>
 				<div class="page-btn goBack">
@@ -54,68 +62,71 @@ require_once('./common/sidebar.php');
 						<thead class="thead-light">
 							<tr>
 
-								<th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th> Name <img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon">
+								<th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon">
 								</th>
-								<th> Phone Number<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-								<th> Address</th>
+								<th> Name <img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+										class="am-sort-icon">
+								</th>
+								<th> Phone No<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+										class="am-sort-icon"></th>
+								<th> Address<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+										class="am-sort-icon"></th>
 								<th class="no-sort">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<?php
+							$deleteStatus = $recycle ? 1 : 0;
+							$partyList = $action->get_admin_function->fetchParty(null, null, $deleteStatus);
+							if ($partyList) {
+								$sr = 1;
+								foreach ($partyList as $wd) {
+									?>
+									<tr>
+										<td><?= $sr; ?></td>
+										<td class="text-gray-9"><?= $wd['party_name']; ?></td>
+										<td class="text-gray-9"><?= $wd['party_phone']; ?></td>
+										<td>
+											<div class="am-text-container">
+												<?= $wd['address']; ?>
+											</div>
+											<button class="am-see-more-btn" onclick="toggleText(this)">See More</button>
+										</td>
+										<td class="action-table-data d-flex align-items-center">
+											<?php if (!$recycle) { ?>
+												<div class="form-check form-switch">
+													<input class="form-check-input off_party" type="checkbox" <?php if ($wd['status'] == 1) {
+														echo "checked";
+													} ?> data-checkid="<?= @$wd['id']; ?>"
+														role="switch" id="checkedOrNot_<?= $sr; ?>">
+													<label class="form-check-label" for="checkedOrNot_<?= $sr; ?>"></label>
+												</div>
+											<?php } ?>
 
-								<td>1 </td>
-								<td>
-									Lenovo IdeaPad
-								</td>
-								<td>1234567890</td>
-
-								<td>
-									<div class="am-text-container">
-										Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, tenetur.
-									</div>
-								</td>
-								<td class="action-table-data">
-									<div class="edit-delete-action">
-
-										<a class="me-2 p-2" href="./party-add.php">
-											<i data-feather="edit" class="feather-edit text-info"></i>
-										</a>
-										<a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2" href="javascript:void(0);">
-											<i data-feather="trash-2" class="feather-trash-2 text-danger"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-
-								<td>1 </td>
-								<td>
-									Lenovo IdeaPad
-								</td>
-								<td>1234567890</td>
-
-								<td>
-									<div class="am-text-container">
-										Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora, tenetur.
-									</div>
-								</td>
-								<td class="action-table-data">
-									<div class="edit-delete-action">
-
-										<a class="me-2 p-2" href="./party-add.php">
-											<i data-feather="edit" class="feather-edit text-info"></i>
-										</a>
-										<a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2" href="javascript:void(0);">
-											<i data-feather="trash-2" class="feather-trash-2 text-danger"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-
-
-
+											<div class="edit-delete-action">
+												<?php if (!$recycle) { ?>
+													<a href="./party-add.php?id=<?= $wd['id']; ?>"
+														class="p-2 border-0 bg-transparent">
+														<i data-feather="edit" class="feather-edit text-warning"></i>
+													</a>
+												<?php }
+												if ($deleteStatus == 1) { ?>
+													<button type="button" class="p-2 border-0 bg-transparent recover-party"
+														data-delid="<?= @$wd['id']; ?>">
+														<i data-feather="refresh-ccw" class="feather-refresh-ccw text-success"></i>
+													</button>
+												<?php } else { ?>
+													<button type="button" class="p-2 border-0 bg-transparent delete-party"
+														data-delid="<?= @$wd['id']; ?>">
+														<i data-feather="trash-2" class="feather-trash-2 text-danger"></i>
+													</button>
+												<?php } ?>
+											</div>
+										</td>
+									</tr>
+									<?php $sr++;
+								}
+							} ?>
 
 						</tbody>
 					</table>

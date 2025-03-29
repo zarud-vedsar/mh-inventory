@@ -786,9 +786,11 @@ input:checked+.slider:before {
     transform: rotate(1turn)
   }
 }
-
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.search-input input{
+  border: 1px solid #e2dfdf;
 }

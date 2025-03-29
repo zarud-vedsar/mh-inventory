@@ -24,12 +24,11 @@ $(document).ready(function () {
     }
     $(elmid).val(phoneNumber); // Update input value
   }
-  const formSubmit = (sub_btn = '#sub_btn', loader_f = '#loader-f') => {
-    $(sub_btn).addClass('d-none');
+  const formSubmit = (loader_f = '#loader-f') => {
     $(loader_f).removeClass('d-none');
   }
-  const formStop = (sub_btn = '#sub_btn', loader_f = '#loader-f') => {
-    $(sub_btn).removeClass('d-none');
+
+  const formStop = (loader_f = '#loader-f') => {
     $(loader_f).addClass('d-none');
   }
   // Attach input event listener to phone number input field
@@ -42,7 +41,17 @@ $(document).ready(function () {
   /*----------------------------------------------------------------------------
                   -- Widget Setting Show Or Hide --
   --------------------------------------------------------------------------- */
-  check_status1(".home-banner-checkbox1", "37", 'home_page');
+  check_status(".off_warehouse", 2);
+  delete_table('.delete-warehouse', 2);
+  delete_recycle('.recover-warehouse', 2);
+
+  check_status(".off_item", 3);
+  delete_table('.delete-item', 3);
+  delete_recycle('.recover-item', 3);
+
+  check_status(".off_party", 4);
+  delete_table('.delete-party', 4);
+  delete_recycle('.recover-party', 4);
 
   /*----------------------------------------------------------------------------
                 -- Widget Setting Show Or Hide --
@@ -98,7 +107,7 @@ $(document).ready(function () {
   $(document).on("submit", "#login_fd", function (e) {
     e.preventDefault();
     $("#sub_btn").prop('disabled', true);
-    formStop();
+    formSubmit();
     $('.error-span').text('');
     const formData = new FormData(this);
     formData.append('data', 'login');
@@ -170,7 +179,7 @@ $(document).ready(function () {
   $(document).on("submit", "#save_warehouse", function (e) {
     e.preventDefault();
     $("#sub_btn").prop('disabled', true);
-    formStop();
+    formSubmit();
     $('.error-span').text('');
     const formData = new FormData(this);
     formData.append('data', 'save_warehouse');
@@ -217,7 +226,173 @@ $(document).ready(function () {
     });
   });
 
-
+  $(document).on('click', '.edit-warehouse', function (e) {
+    e.preventDefault();
+    const id = $(this).data('id');
+    $.ajax({
+      url: path_set,
+      type: 'POST',
+      data: {
+        data: 'fetchWareHouseJson',
+        id
+      },
+      success: (res) => {
+        const data = JSON.parse(res);
+        $("#updateid").val(data.id);
+        $("#warehouse_name").val(data.wtitle);
+      }
+    });
+  });
+  // ! ||--------------------------------------------------------------------------------||
+  // ! ||                             ITEM ADD AND UPDATE                                ||
+  // ! ||--------------------------------------------------------------------------------||
+  $(document).on("submit", "#save_item", function (e) {
+    e.preventDefault();
+    $("#sub_btn").prop('disabled', true);
+    formSubmit();
+    $('.error-span').text('');
+    const formData = new FormData(this);
+    formData.append('data', 'save_item');
+    $.ajax({
+      url: path_set,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function (res) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(res);
+          if ([200, 201].includes(json.status)) {
+            if (json.status == 201) {
+              $("#save_item").trigger('reset');
+            }
+            swaMsg("success", json.msg, "#0F843F");
+          } else {
+            json.key && $(`.${json.key}`).text();
+            swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+        }
+      },
+      error: function (jqXHR) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(jqXHR.responseText);
+          if ([400, 401, 500].includes(json.status)) {
+            json.key && $(`.${json.key}`).text(json.msg);
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred while submitting the form. Please try again later.", "#FA5252");
+        }
+      }
+    });
+  });
+  // ! ||--------------------------------------------------------------------------------||
+  // ! ||                                   ITEM IMPORT                                  ||
+  // ! ||--------------------------------------------------------------------------------||
+  $(document).on("submit", "#upload_csv_item", function (e) {
+    e.preventDefault();
+    $("#sub_btn1").prop('disabled', true);
+    formSubmit('#loader-f1');
+    $('.error-span').text('');
+    const formData = new FormData(this);
+    formData.append('data', 'upload_csv_item');
+    $.ajax({
+      url: path_set,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function (res) {
+        $("#sub_btn1").prop('disabled', false);
+        formStop('#loader-f1');
+        try {
+          let json = JSON.parse(res);
+          if ([200, 201].includes(json.status)) {
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
+            swaMsg("success", json.msg, "#0F843F");
+          } else {
+            json.key && $(`.${json.key}`).text();
+            swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+        }
+      },
+      error: function (jqXHR) {
+        $("#sub_btn1").prop('disabled', false);
+        formStop('#loader-f1');
+        try {
+          let json = JSON.parse(jqXHR.responseText);
+          if ([400, 401, 500].includes(json.status)) {
+            json.key && $(`.${json.key}`).text(json.msg);
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred while submitting the form. Please try again later.", "#FA5252");
+        }
+      }
+    });
+  });
+  // ! ||--------------------------------------------------------------------------------||
+  // ! ||                             PARTY ADD AND UPDATE                               ||
+  // ! ||--------------------------------------------------------------------------------||
+  $(document).on("submit", "#save_party", function (e) {
+    e.preventDefault();
+    $("#sub_btn").prop('disabled', true);
+    formSubmit();
+    $('.error-span').text('');
+    const formData = new FormData(this);
+    formData.append('data', 'save_party');
+    $.ajax({
+      url: path_set,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function (res) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(res);
+          if ([200, 201].includes(json.status)) {
+            if (json.status == 201) {
+              $("#save_party").trigger('reset');
+            }
+            swaMsg("success", json.msg, "#0F843F");
+          } else {
+            json.key && $(`.${json.key}`).text();
+            swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+        }
+      },
+      error: function (jqXHR) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(jqXHR.responseText);
+          if ([400, 401, 500].includes(json.status)) {
+            json.key && $(`.${json.key}`).text(json.msg);
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred while submitting the form. Please try again later.", "#FA5252");
+        }
+      }
+    });
+  });
   // ! ||--------------------------------------------------------------------------------||
   // ! ||                             End Of Jquery           	                         ||
   // ! ||--------------------------------------------------------------------------------||

@@ -20,8 +20,8 @@ class Database
     $tables = [
       1 => 'aimo_users',
       2 => 'aimo_warehouse',
-      3 => '',
-      4 => '',
+      3 => 'aimo_item',
+      4 => 'aimo_party',
       5 => '',
       6 => '',
       7 => '',
@@ -330,20 +330,11 @@ class Database
     try {
       $stmt = $this->conn->prepare($sql);
       foreach ($data as $column => $value) {
-        //if($value=='null' || $value== 'NULL');{
-
-        // $value= null;
-        // }
-
         $stmt->bindValue(':' . $column, $value);
-        //  $debugSql = str_replace(':' . $column, $this->conn->quote($value), $debugSql);
       }
-      // print_r($debugSql);
-      // die;
-      $stmt->execute();
-      return $this->conn->lastInsertId();
+      return $stmt->execute() ? $this->conn->lastInsertId() : false;
     } catch (PDOException $e) {
-      return $e;
+      return false;
     }
   }
 

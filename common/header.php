@@ -73,9 +73,8 @@ if (!$action->session->get("admin_id")) {
 			<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
 				aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="profile.html">My Profile</a>
-				<a class="dropdown-item" href="general-settings.html">Settings</a>
-				<a class="dropdown-item" href="signin.html">Logout</a>
+				<a class="dropdown-item" href="./change-password">Change Password</a>
+				<a class="dropdown-item" href="#" id="logout1">Logout</a>
 			</div>
 		</div>
 		<!-- /Mobile Menu -->
