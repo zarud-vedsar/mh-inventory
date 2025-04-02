@@ -123,10 +123,10 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                     } ?>
                                 </tbody>
                             </table>
-                            <p class="total"> Transport/Lorry No:</p>
+                            <p class="total"> Transport/Lorry No: <?= @$order_item[0]['vehicle_no']; ?></p>
                             <p class="total">Total No. Of Bags: <?= @$order_item[0]['no_of_bags']; ?></p>
                             <p class="total">Total No. Of Coupon: <?= @$order_item[0]['no_of_coupon']; ?></p>
-                            <p class="total">Total Kgs: <?= @$order_item[0]['vehicle_no']; ?></p>
+                            <p class="total">Total Kgs: <?= @$order_item[0]['t_weight']; ?></p>
                         </div>
                     </div>
                 </div>

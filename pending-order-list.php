@@ -18,27 +18,29 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
             <ul class="table-top-head">
 
                 <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i class="ti ti-chevron-up"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
+                            class="ti ti-chevron-up"></i></a>
                 </li>
             </ul>
             <div class="am-page-upr-btn">
                 <div class="left-btn">
                     <div class="page-btn">
-                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Pending orders</a>
+                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>New
+                            Pending orders</a>
                     </div>
                     <div class="page-btn">
-						<?php if ($recycle) { ?>
-							<a href="./pending-order-list.php" class="btn btn-secondary">
-								<i data-feather="eye-off"></i>
-								Hide Recycle Bin
-							</a>
-						<?php } else { ?>
-							<a href="./pending-order-list.php?recycle=true" class="btn btn-danger">
-								<i data-feather="trash-2"></i>
-								Show Recycle Bin
-							</a>
-						<?php } ?>
-					</div>
+                        <?php if ($recycle) { ?>
+                            <a href="./pending-order-list.php" class="btn btn-secondary">
+                                <i data-feather="eye-off"></i>
+                                Hide Recycle Bin
+                            </a>
+                        <?php } else { ?>
+                            <a href="./pending-order-list.php?recycle=true" class="btn btn-danger">
+                                <i data-feather="trash-2"></i>
+                                Show Recycle Bin
+                            </a>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="page-btn goBack">
                     <a href="#" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
@@ -128,19 +130,24 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                     <table class="table datatable">
                         <thead class="thead-light">
                             <tr>
-                                <th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-                                <th> Order Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-                                <th> Party<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-                                <th> Dispatched Status<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
-                                <th> Dispatched Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
+                                <th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon">
+                                </th>
+                                <th> Order Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+                                        class="am-sort-icon"></th>
+                                <th> Party<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+                                        class="am-sort-icon"></th>
+                                <th> Dispatched Status<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+                                        class="am-sort-icon"></th>
+                                <th> Dispatched Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt=""
+                                        class="am-sort-icon"></th>
 
                                 <th class="no-sort">Action</th>
-                    
+
                             </tr>
                         </thead>
                         <tbody>
-                         <?php 
-                            $sql="SELECT aimo_order.*,aimo_party.party_name,aimo_party.party_phone FROM aimo_order JOIN aimo_party ON aimo_party.id=aimo_order.pending_party WHERE 1";
+                            <?php
+                            $sql = "SELECT aimo_order.*,aimo_party.party_name,aimo_party.party_phone FROM aimo_order JOIN aimo_party ON aimo_party.id=aimo_order.pending_party WHERE 1";
                             $deleteStatus = $recycle ? 1 : 0;
                             $sql .= " AND aimo_order.deleteStatus = {$deleteStatus}";
                             
