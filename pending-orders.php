@@ -70,7 +70,6 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
         rows.forEach((row, index) => {
             row.cells[0].textContent = index + 1;
         });
-        $("#no_of_bags").val(rows.length);
     }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -413,6 +412,14 @@ require_once('./common/footer.php');
     }
     function warehouseUpdate() {
         const warehouseidElements = document.querySelectorAll('.warehouseid');
+        const item_qty = document.querySelectorAll('.item_qty');
+        let bags_count = 0;
+        item_qty.forEach((item) => {
+            if (item.value > 0){
+                bags_count += parseFloat(item.value);
+            }
+        });
+        $("#no_of_bags").val(bags_count);
         for (let key in warehouse) {
             warehouse[key] = 0;
         }
