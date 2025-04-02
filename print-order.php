@@ -1,7 +1,5 @@
 <?php
 require_once('./common/head.php');
-require_once('./common/header.php');
-require_once('./common/sidebar.php');
 if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetData('oid'), FILTER_VALIDATE_INT)) {
     $id = $action->db->validateGetData('oid');
     $order_item = $action->db->sql("SELECT aimo_party.party_name, aimo_party.party_phone, aimo_party.address, aimo_order.* FROM aimo_order LEFT JOIN aimo_party ON aimo_order.pending_party = aimo_party.id WHERE aimo_order.id = $id");
@@ -13,66 +11,68 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
     #ai-table {
         width: 100%;
         border-collapse: collapse;
+        margin: 0;
         margin-top: 20px;
-        border: 1px solid rgb(206, 203, 203);
+        padding: 0;
+        border: 2px solid #ccc;
+    }
+
+    #ai-table th {
+        background-color: #F2F2F2;
+        font-weight: 500;
+    }
+
+    #ai-table td {
+        font-weight: 400;
     }
 
     #ai-table th,
     td {
-        border-bottom: 1px solid rgb(229, 226, 226);
-        padding: 15px;
-    }
-
-    .ai-tbody {
-        border-top: 1px solid rgb(231, 231, 231);
-        padding: 15px;
+        border: 2px solid #ccc;
+        padding: 2px;
+        font-size: 16px;
+        color: #000;
         text-align: center;
     }
 
+    .ai-tbody {
+        padding: 3px;
+        text-align: start;
+    }
+
     .total {
-        text-align: right;
-        margin: 20px 80px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        width: 35%;
+        margin: 20px auto 0 0;
+        border-bottom: 2px solid #ccc;
+    }
+
+    p {
+        color: #000 !important;
+        font-weight: 500;
     }
 
     .ai-pairagraf {
         display: flex;
         justify-content: right;
         margin-right: 40px;
-        margin-bottom: 10px;
-    }
-
-    .ai-pairagraf-2 {
-        margin-left: 20px;
+        margin-bottom: 5px;
+        color: #000;
     }
 </style>
-<div class="page-wrapper bg-white">
-    <div class="content">
-        <div class="page-header">
-            <div class="add-item d-flex">
-                <div class="page-title">
-                    <h4 class="fw-bold">Pending Orders Receipt</h4>
-                </div>
-            </div>
-            <ul class="table-top-head">
-                <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
-                            class="ti ti-chevron-up"></i></a>
-                </li>
-            </ul>
-            <div class="am-page-upr-btn">
-                <div class="left-btn">
-                </div>
-                <div>
-                    <div class="page-btn goBack">
-                        <a href="#" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
-                    </div>
-                </div>
-            </div>
+<div class="page-wrapper bg-light w-100 p-0 m-0">
+    <div class="row">
+        <div class="col-md-10 px-0 text-end">
+            <!-- <button id="download" class="btn btn-primary">Download as PDF</button> -->
         </div>
-        <div class="container">
+    </div>
+    <div class="content">
+        <div class="container bg-white" id="content" style="width: 27cm;margin: 0 auto;">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="content" class="ai-table-container" style="width: 27cm;">
+                    <div class="ai-table-container">
                         <div class="ai-table-header d-flex justify-content-between">
                             <p class="ai-pairagraf-2">Party Name: <?= @$order_item[0]['party_name']; ?></p>
                             <p class="ai-pairagraf"> Order Date:
@@ -82,12 +82,13 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                         <table id="ai-table">
                             <thead>
                                 <tr>
-                                    <th>SL.NO.</th>
-                                    <th>ITEM NAME</th>
-                                    <th>QTY</th>
-                                    <th>x</th>
-                                    <th>KG/QTY</th>
-                                    <th>REMARKS</th>
+                                    <th style="width: 20px;">SL.NO.</th>
+                                    <th style="width: 100px;">ITEM NAME</th>
+                                    <th style="width: 60px;">QTY</th>
+                                    <th style="width: 30px;">x</th>
+                                    <th style="width: 60px;">KG/QTY</th>
+                                    <th style="width: 130px;">REMARKS</th>
+                                    <th style="width: 40px;">TICK</th>
                                 </tr>
                             </thead>
                             <tbody class="ai-tbody">
@@ -105,25 +106,33 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                                 <td><?= $sr++; ?></td>
                                                 <td><?= $itemName[0]['item_name']; ?></td>
                                                 <td><?= $d['item_qty']; ?></td>
-                                                <td></td>
+                                                <td>x</td>
                                                 <td><?= $d['item_kg']; ?></td>
                                                 <td><?= base64_decode($d['remark']); ?></td>
+                                                <td>
+                                                    <div class="form-check mb-0">
+                                                        <input class="form-check-input mx-0" style="float: none;" type="checkbox"
+                                                            value="" id="flexCheckChecked" checked>
+                                                        <label class="form-check-label" for="flexCheckChecked">
+
+                                                        </label>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         <?php }
                                     }
                                 } ?>
                             </tbody>
                         </table>
-                        <p class="total"> Transport/Lorry No: <?= @$order_item[0]['vehicle_no']; ?></p>
-                        <p class="total">Total No. Of Bags: <?= @$order_item[0]['no_of_bags']; ?></p>
-                        <p class="total">Total No. Of Coupon: <?= @$order_item[0]['no_of_coupon']; ?></p>
-                        <p class="total">Total Kgs: <?= @$order_item[0]['t_weight']; ?></p>
+                        <p class="total">Total No. Of Bags: <strong><?= @$order_item[0]['no_of_bags']; ?></strong></p>
+                        <p class="total">Total No. Of Coupon: <strong><?= @$order_item[0]['no_of_coupon']; ?></strong>
+                        </p>
+                        <p class="total">Total Kgs: <strong><?= @$order_item[0]['t_weight']; ?></strong></p>
+                        <p class="total"> Transport/Lorry No: <strong><?= @$order_item[0]['vehicle_no']; ?></strong></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Download Button -->
-        <button id="download" class="btn btn-primary">Download as PDF</button>
     </div>
 </div>
 
@@ -142,7 +151,7 @@ require_once('./common/footer.php');
             const element = document.getElementById('content');
             // console.log(element);
             const options = {
-                margin: [0.4, 0.2, 0.4, 0],  // Increase margins to avoid content getting cut
+                margin: [0.4, 0.6, 0.4, 0],  // Increase margins to avoid content getting cut
                 jsPDF: {
                     unit: 'in',  // Unit for the page size (inches)
                     format: 'a4',  // Format for the document (A4 size)
@@ -158,5 +167,5 @@ require_once('./common/footer.php');
                 .save('receipt-.pdf');
         });
     });
-
+    // setTimeout(() => window.print(), 200);
 </script>
