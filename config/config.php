@@ -29,7 +29,10 @@ class Database
     ];
     return isset($tables[$index]) ? $tables[$index] : null;
   }
-
+    public function indiandate($date)
+    {
+      return date('d/m/Y', strtotime($date));
+    }
   /**
    * Database constructor initializes the connection.
    */
