@@ -370,8 +370,67 @@ $(document).ready(function () {
           if ([200, 201].includes(json.status)) {
             if (json.status == 201) {
               $("#save_party").trigger('reset');
+              if (json.data) {
+                $("#pending_party").append(`
+                  <option value="${json.data.id}" Selected>${json.data.party_name} (${json.data.party_phone ? json.data.party_phone : ''})</option>
+                  `);
+                $(".dismiss-party").trigger('click');
+              }
             }
             swaMsg("success", json.msg, "#0F843F");
+          } else {
+            json.key && $(`.${json.key}`).text();
+            swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+        }
+      },
+      error: function (jqXHR) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(jqXHR.responseText);
+          if ([400, 401, 500].includes(json.status)) {
+            json.key && $(`.${json.key}`).text(json.msg);
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred while submitting the form. Please try again later.", "#FA5252");
+        }
+      }
+    });
+  });
+  // ! ||--------------------------------------------------------------------------------||
+  // ! ||                                 Pending Order                                  ||
+  // ! ||--------------------------------------------------------------------------------||
+  $(document).on("submit", "#pending_order_save", function (e) {
+    e.preventDefault();
+    $("#sub_btn").prop('disabled', true);
+    formSubmit();
+    $('.error-span').text('');
+    const formData = new FormData(this);
+    formData.append('data', 'pending_order_save');
+    $.ajax({
+      url: path_set,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function (res) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(res);
+          if ([200, 201].includes(json.status)) {
+            if (json.status == 201) {
+              $("#pending_order_save").trigger('reset');
+            }
+            swaMsg("success", json.msg, "#0F843F");
+            setTimeout(() => {
+              window.location.assign(`./print-order.php?oid=${json.data}`);
+            }, 500);
           } else {
             json.key && $(`.${json.key}`).text();
             swaMsg("error", "An error occurred. Please try again.", "#FA5252");

@@ -297,6 +297,7 @@ function save_party()
     if (!$updateid) {
         $res = $action->db->insert('aimo_party', $data);
         $msg = "Party created successfully.";
+        $data['id'] = $res;
     } else {
         $res = $action->db->update('aimo_party', "id = {$updateid}", $data);
         $msg = "Party updated successfully.";
@@ -307,6 +308,113 @@ function save_party()
         return;
     }
     http_response_code($updateid ? 200 : 201);
-    echo $action->db->json($updateid ? 200 : 201, $msg);
+    echo $action->db->json($updateid ? 200 : 201, $msg, null, $data);
 }
+function fetchItemByid()
+{
+    global $action;
+    $item_id = $action->db->validatePostData('item_id') ?: null;
+    if ($item_id) {
+        echo $action->get_admin_function->jsonData(3, $item_id);
+    }
+}
+function fetchWareHouseName()
+{
+    global $action;
+    if (isset($_POST['ids'])) {
+        // Decode the JSON data
+        $ids = json_decode($_POST['ids'], true);
+
+        // Filter out any non-numeric or empty IDs
+        $ids = array_filter($ids, function ($id) {
+            return is_numeric($id) && $id > 0;  // Ensure the ID is numeric and greater than 0
+        });
+
+        // Extract only the keys from the filtered array
+        $keys = array_keys($ids);
+
+        // Convert the keys into a comma-separated string
+        $keys_str = implode(',', $keys);
+
+        // If there are valid IDs, proceed with the query (optional)
+        if (!empty($ids)) {
+            $res = $action->db->sql("SELECT id, wtitle FROM aimo_warehouse WHERE id IN (" . $keys_str . ")");
+            // If needed, you can print the query or results for debugging
+            if ($res) {
+                echo json_encode($res);
+            }
+        } else {
+        }
+    }
+}
+function pending_order_save()
+{
+    global $action;
+    $note = $action->db->validatePostData('note') ?: '';
+    $order_date = $action->db->setPostRequiredField('order_date', 'Order date is required.');
+    $pending_party = $action->db->setPostRequiredField('pending_party', 'Party field is required.');
+    $note = $action->db->validatePostData('note') ?: '';
+    $no_of_bags = $action->db->setPostRequiredField('no_of_bags', 'Total number of bags is required.');
+    $no_of_coupon = $action->db->validatePostData('no_of_coupon');
+    $t_weight = $action->db->setPostRequiredField('t_weight', 'Total kgs is required.');
+    $vehicle_no = $action->db->validatePostData('vehicle_no') ?: '';
+    $updateid = $action->db->validatePostData('updateid') ?: null;
+    $dispatched_date = $action->db->validatePostData('dispatched_date') ?: null;
+    $item_id = $_POST['item_id'];
+    $item_qty = $_POST['item_qty'];
+    $item_kg = $_POST['item_kg'];
+    $item_coupon = $_POST['item_coupon'];
+    $warehouseid = $_POST['warehouseid'];
+    $total_item_coupon = $_POST['total_item_coupon'];
+    $total_item_weight = $_POST['total_item_weight'];
+    $remark = @$_POST['remark'];
+
+    if (count($item_id) === count($item_qty)) {
+        $dataArray = [];
+        foreach ($item_id as $index => $val) {
+            $item = [
+                'item_id' => $action->db->sanitizeClientInput($item_id[$index]),
+                'item_qty' => $action->db->sanitizeClientInput($item_qty[$index]),
+                'item_kg' => $action->db->sanitizeClientInput($item_kg[$index]),
+                'item_coupon' => $action->db->sanitizeClientInput($item_coupon[$index]),
+                'warehouseid' => $action->db->sanitizeClientInput($warehouseid[$index]),
+                'total_item_coupon' => $action->db->sanitizeClientInput($total_item_coupon[$index]),
+                'total_item_weight' => $action->db->sanitizeClientInput($total_item_weight[$index]),
+                'remark' => base64_encode($action->db->sanitizeClientInput($remark[$index])),
+            ];
+            $dataArray[] = $item;
+        }
+        $data = [
+            'dispatched_date' => $dispatched_date,
+            'note' => $note,
+            'order_date' => $order_date,
+            'pending_party' => $pending_party,
+            'no_of_bags' => $no_of_bags,
+            'no_of_coupon' => $no_of_coupon,
+            't_weight' => $t_weight,
+            'vehicle_no' => $vehicle_no,
+            'item' => json_encode($dataArray, JSON_UNESCAPED_UNICODE)
+        ];
+        if (!$updateid) {
+            $response = $action->db->insert('aimo_order', $data);
+            $msg = "Order created.";
+            $updateid = $response;
+        } else {
+            $response = $action->db->update('aimo_order', "id = {$updateid}", $data);
+            $msg = "Order updated.";
+        }
+        if (!$response) {
+            http_response_code(500);
+            echo $action->db->json(500, "Internal server error");
+            return;
+        }
+        http_response_code($updateid ? 200 : 201);
+        echo $action->db->json($updateid ? 200 : 201, $msg, null, $updateid);
+    } else {
+        http_response_code(400);
+        $json = $action->db->json(400, "Missing no of item and qty.");
+    }
+}
+
+
 ?>

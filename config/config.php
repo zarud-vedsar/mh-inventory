@@ -22,7 +22,7 @@ class Database
       2 => 'aimo_warehouse',
       3 => 'aimo_item',
       4 => 'aimo_party',
-      5 => '',
+      5 => 'aimo_order',
       6 => '',
       7 => '',
       8 => '',
@@ -68,7 +68,6 @@ class Database
       // Handle exception (logging, etc.)
     }
   }
-
 
   /**
    * Calculate total days between two dates.
@@ -173,7 +172,6 @@ class Database
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
     return $protocol . '://' . $_SERVER['HTTP_HOST'];
   }
-
 
 
   /**
@@ -328,8 +326,6 @@ class Database
     $columns = array_keys($data);
     $placeholders = ':' . implode(', :', $columns);
     $sql = "INSERT INTO " . $table_name . " (" . implode(",", $columns) . ") VALUES (" . $placeholders . ")";
-    $debugSql = $sql; //debugging
-
     try {
       $stmt = $this->conn->prepare($sql);
       foreach ($data as $column => $value) {
@@ -337,6 +333,7 @@ class Database
       }
       return $stmt->execute() ? $this->conn->lastInsertId() : false;
     } catch (PDOException $e) {
+      // print_r($e->getMessage());
       return false;
     }
   }
