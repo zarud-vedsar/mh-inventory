@@ -66,6 +66,10 @@ class get_admin_function extends Database
       $q .= " AND deleteStatus = {$deleteStatus}";
     return $this->sql($q) ?: [];
   }
+  public function fetchItemDropdown()
+  {
+    return $this->sql("SELECT item_name, print_name, id FROM aimo_item WHERE deleteStatus = 0") ?: [];
+  }
   public function fetchParty($id = null, $status = null, $deleteStatus = null)
   {
     $q = "SELECT * FROM aimo_party WHERE 1";
