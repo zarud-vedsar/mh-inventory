@@ -66,7 +66,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                     <div class="mb-3">
                                         <label class="form-label">Dispatched Date From</label>
                                         <div class="input-groupicon calender-input">
-                                            <input type="date" name="dispatched_date_from" class="form-control">
+                                            <input type="date" name="dispatched_date_from" value="<?= @$_GET['dispatched_date_from'];?>" class="form-control">
                                         </div>
                                      </div>
                                    </div>
@@ -74,7 +74,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                        <div class="mb-3">
                                         <label class="form-label">Dispatched Date To</label>
                                         <div class="input-groupicon calender-input">
-                                            <input type="date" name="dispatched_date_to" class="form-control">
+                                            <input type="date" name="dispatched_date_to" value="<?= @$_GET['dispatched_date_to']; ?>" class="form-control">
                                         </div> 
                                     </div>
                                  </div>
@@ -82,7 +82,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                     <div class="mb-3">
                                         <label class="form-label">Order Date From</label>
                                         <div class="input-groupicon calender-input">
-                                            <input type="date" name="order_date_from" class="form-control">
+                                            <input type="date" name="order_date_from" value="<?= @$_GET['order_date_from']; ?>" class="form-control">
                                         </div> 
                                     </div>
                                 </div>
@@ -90,21 +90,40 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                     <div class="mb-3">
                                         <label class="form-label">Order Date To</label>
                                         <div class="input-groupicon calender-input">
-                                            <input type="date" name="order_date_to" class="form-control">
+                                            <input type="date" name="order_date_to" value="<?= @$_GET['order_date_to']; ?>" class="form-control">
                                         </div> 
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Dispatched Status</label>
-                                        <select name="dispatched_status" class="form-select">
+                                        <select name="dispatched_status" class="select2">
                                             <option value="">Select </option>
-                                            <option value="0">Pending</option>
-                                            <option value="1">Dispatched</option>
+                                            <option <?= @$_GET['dispatched_status'] == 0 ? 'selected' : ""; ?> value="0">Pending</option>
+                                            <option <?= @$_GET['dispatched_status'] == 1 ? 'selected' : ""; ?> value="1">Dispatched</option>
+                                            <option <?= @$_GET['dispatched_status'] == 'all' ? 'selected' : ""; ?> value="all">All</option>
                                         </select>
                                     </div>
                                 </div>
-                                </div>
+                                <div class="col-sm-3 col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Party</label>
+                                        <select name="party" class="select2">
+                                            <option value="">Select </option>
+                                            <?php 
+                                              $partysql = "SELECT id, party_name, party_phone FROM aimo_party WHERE status = 1 AND deleteStatus = 0";
+                                              $partydata = $action->db->sql($partysql);
+                                              if($partydata){
+                                                foreach($partydata as $party){
+                                                    ?>
+                                                    <option <?= @$_GET['party'] == $party['id'] ? 'selected' : ""; ?> value="<?php echo $party['id'];?>"><?php echo $party['party_name'];?> (<?php echo $party['party_phone'];?>)</option>
+                                                 <?php   
+                                                }
+                                              }
+                                       ?>
+                                        </select>
+                                    </div>
+                                  </div>
 								
 								<div class="col-sm-3 col-md-3 col-12 flex">
 									<button type="submit" class="btn btn-primary me-2">Apply</button>
@@ -147,6 +166,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                         </thead>
                         <tbody>
                             <?php
+                            $sql = '';
                             $sql = "SELECT aimo_order.*,aimo_party.party_name,aimo_party.party_phone FROM aimo_order JOIN aimo_party ON aimo_party.id=aimo_order.pending_party WHERE 1";
                             $deleteStatus = $recycle ? 1 : 0;
                             $sql .= " AND aimo_order.deleteStatus = {$deleteStatus}";
@@ -164,20 +184,24 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                             }
                             if(isset($_GET['dispatched_status'])){ 
                                 $dispatched_status = $_GET['dispatched_status'];
-                                if($dispatched_status == 0){
-                                    $sql .= " AND aimo_order.dispatched_date = '0000-00-00'";
+                                if($dispatched_status == 0 || $dispatched_status == ""){
+                                    $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date IS NULL OR aimo_order.dispatched_date = '')";
                                 }
                                 if($dispatched_status == 1){
                                     $sql .= " AND aimo_order.dispatched_date != '0000-00-00'";
                                 }
-                                if($dispatched_status == ""){
+                                if($dispatched_status == "all"){
                                     $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date != '0000-00-00')";
                                 }
 
+                            }else{
+                                $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date IS NULL OR aimo_order.dispatched_date = '')";
                             }
-                            $orderlisting = $action->db->sql($sql);
-
-                            
+                            if($action->db->validateGetData('party')){
+                                $party = $action->db->validateGetData('party');
+                                $sql .= " AND aimo_order.pending_party = '{$party}'";
+                            }
+                              $orderlisting = $action->db->sql($sql);
                             if($orderlisting){
 
                                 $sr = 1;
