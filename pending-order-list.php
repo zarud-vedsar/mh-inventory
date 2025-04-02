@@ -64,7 +64,11 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                 <th>#<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
                                 <th> Order Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
                                 <th> Party<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
+                                <th> Dispatched Status<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
+                                <th> Dispatched Date<img src="./assets/img/svg_icons/right-left-arrow.svg" alt="" class="am-sort-icon"></th>
+
                                 <th class="no-sort">Action</th>
+                    
                             </tr>
                         </thead>
                         <tbody>
@@ -83,11 +87,21 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                <td><?= $sr++; ?></td> 
                                <td class="text-gray-9"><?= $action->db->indiandate($od['order_date']); ?></td>
                                <td class="text-gray-9"><?= $od['party_name'];?></td>
+                               <td>
+                                 <?php 
+                                  if(empty($od['dispatched_date']) || $od['dispatched_date'] == '0000-00-00'){
+                                       echo "<span class='text-warning'> Pending <span>";
+                                  }else{
+                                    echo "<span class='text-success'> Dispatched <span>";
+                                  }
+                                 ?>
+                               </td>
+                               <td class="text-gray-9"><?= $action->db->indiandate($od['dispatched_date']); ?></td> 
                                <td class="action-table-data d-flex align-items-center">
 											
 											<div class="edit-delete-action">
 												<?php if (!$recycle) { ?>
-													<a href="./product-add.php?id=<?= $od['id']; ?>"
+													<a href="./pending-orders.php?id=<?= $od['id']; ?>"
 														class="p-2 border-0 bg-transparent">
 														<i data-feather="edit" class="feather-edit text-warning"></i>
 													</a>

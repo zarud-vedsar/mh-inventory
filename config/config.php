@@ -31,6 +31,9 @@ class Database
   }
     public function indiandate($date)
     {
+      if(!$date || $date == '0000-00-00'){
+        return false;
+      }
       return date('d/m/Y', strtotime($date));
     }
   /**
