@@ -126,14 +126,17 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
                                         </div>
                                     </div>
                                 </div>
-                                  <div class="col-sm-2 col-12">
-                                    <div class="mb-3">
+                                  <div class="col-sm-3 col-12 d-flex justify-content-between align-items-center">
+                                    <div class="mb-3 w-75">
                                         <label class="form-label">Dispatched Date</label>
                                         <div class="input-groupicon calender-input">
-                                            <input type="date" name="dispatched_date" class="form-control"
+                                            <input type="date" name="dispatched_date" id="dispatched_date" class="form-control"
                                                 value="<?= @$order_item[0]['dispatched_date']; ?>">
                                         </div>
                                     </div>
+                                    <button type="button" onclick="document.getElementById('dispatched_date').value = ''" title="Reset Dispatched Date" class="btn btn-warning">
+    <i class="fas fa-times"></i>
+</button>
                                 </div>
                                 <div class="col-sm-4 col-12">
                                     <div class="mb-3">
