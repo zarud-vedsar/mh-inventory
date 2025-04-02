@@ -99,7 +99,7 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
             <div class="am-page-upr-btn">
                 <div class="left-btn">
                     <div class="page-btn">
-                        <a href="./party-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i></i>
+                        <a href="./pending-order-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i></i>
                             Order List</a>
                     </div>
                 </div>

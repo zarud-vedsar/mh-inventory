@@ -45,7 +45,74 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                 </div>
             </div>
         </div>
-
+        <div class="accordion accordion-primary mb-2" id="accordionPrimaryExample">
+			<div class="accordion-item border-0">
+				<h2 class="accordion-header" id="headingPrimaryOne">
+					<button class="accordion-button	 fw-bold fs-16 <?= @$_GET['filter'] ? '' : 'collapsed'; ?>"
+						type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrimaryOne"
+						aria-expanded="false" aria-controls="collapsePrimaryOne">
+						<i class="ti ti-filter me-2"></i> Filter
+					</button>
+				</h2>
+				<div id="collapsePrimaryOne" class="accordion-collapse collapse <?= @$_GET['filter'] ? 'show' : ''; ?>"
+					aria-labelledby="headingPrimaryOne" data-bs-parent="#accordionPrimaryExample">
+					<div class="accordion-body">
+						<form method="get">
+							<input type="hidden" name="filter" value="true">
+							<div class="row">
+                            <div class="col-sm-3 col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Dispatched Date From</label>
+                                        <div class="input-groupicon calender-input">
+                                            <input type="date" name="dispatched_date_from" class="form-control">
+                                        </div>
+                                     </div>
+                                   </div>
+                                       <div class="col-sm-3 col-12"> 
+                                       <div class="mb-3">
+                                        <label class="form-label">Dispatched Date To</label>
+                                        <div class="input-groupicon calender-input">
+                                            <input type="date" name="dispatched_date_to" class="form-control">
+                                        </div> 
+                                    </div>
+                                 </div>
+                                    <div class="col-sm-3 col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Order Date From</label>
+                                        <div class="input-groupicon calender-input">
+                                            <input type="date" name="order_date_from" class="form-control">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Order Date To</label>
+                                        <div class="input-groupicon calender-input">
+                                            <input type="date" name="order_date_to" class="form-control">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Dispatched Status</label>
+                                        <select name="dispatched_status" class="form-select">
+                                            <option value="">Select </option>
+                                            <option value="0">Pending</option>
+                                            <option value="1">Dispatched</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </div>
+								
+								<div class="col-sm-3 col-md-3 col-12 flex">
+									<button type="submit" class="btn btn-primary me-2">Apply</button>
+									<a href="./pending-order-list.php" class="btn btn-secondary">Reset</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
         <!-- /product list -->
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
@@ -76,7 +143,33 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                             $sql="SELECT aimo_order.*,aimo_party.party_name,aimo_party.party_phone FROM aimo_order JOIN aimo_party ON aimo_party.id=aimo_order.pending_party WHERE 1";
                             $deleteStatus = $recycle ? 1 : 0;
                             $sql .= " AND aimo_order.deleteStatus = {$deleteStatus}";
+                            
+                            if($action->db->validateGetData('dispatched_date_from') && $action->db->validateGetData('dispatched_date_to')){
+                                $dispatchedDateFrom = $action->db->validateGetData('dispatched_date_from');
+                                $dispatchedDateTo = $action->db->validateGetData('dispatched_date_to');
+                               $sql .= " AND aimo_order.dispatched_date BETWEEN '{$dispatchedDateFrom}' AND '{$dispatchedDateTo}'"; 
+                            }
+
+                            if($action->db->validateGetData('order_date_from') && $action->db->validateGetData('order_date_to')){
+                                $orderDateFrom = $action->db->validateGetData('order_date_from');
+                                $orderDateTo = $action->db->validateGetData('order_date_to');
+                                $sql .= " AND aimo_order.order_date BETWEEN '{$orderDateFrom}' AND '{$orderDateTo}'";
+                            }
+                            if(isset($_GET['dispatched_status'])){ 
+                                $dispatched_status = $_GET['dispatched_status'];
+                                if($dispatched_status == 0){
+                                    $sql .= " AND aimo_order.dispatched_date = '0000-00-00'";
+                                }
+                                if($dispatched_status == 1){
+                                    $sql .= " AND aimo_order.dispatched_date != '0000-00-00'";
+                                }
+                                if($dispatched_status == ""){
+                                    $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date != '0000-00-00')";
+                                }
+
+                            }
                             $orderlisting = $action->db->sql($sql);
+
                             
                             if($orderlisting){
 
@@ -101,6 +194,10 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
 											
 											<div class="edit-delete-action">
 												<?php if (!$recycle) { ?>
+                                                    <a href="./print-order.php?oid=<?= $od['id']; ?>"
+														class="p-2 border-0 bg-transparent">
+														<i data-feather="eye" class="feather-eye text-warning"></i>
+													</a>
 													<a href="./pending-orders.php?id=<?= $od['id']; ?>"
 														class="p-2 border-0 bg-transparent">
 														<i data-feather="edit" class="feather-edit text-warning"></i>
