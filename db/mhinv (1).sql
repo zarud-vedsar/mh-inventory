@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2025 at 02:27 PM
+-- Generation Time: Apr 03, 2025 at 07:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,7 @@ CREATE TABLE `aimo_item` (
 --
 
 INSERT INTO `aimo_item` (`id`, `item_name`, `print_name`, `item_qty`, `alt_qty`, `coupon_point`, `warehouseid`, `remark`, `status`, `deleteStatus`, `deletedAt`) VALUES
-(1, 'R 250 15KGS', 'ROYAL 250 (15KG)', 15, 0, 1, 1, '???? If clicking works in the console but has no effect on UI elements (like toggling a sidebar), ensure the function tied to the click event is being executed.\r\n\r\n✅ Fix: If you&#039;re using a framework or custom script that listens for clicks differently (e.g., jQuery, Bootstrap, or custom event delegation), trigger the event this way:', 0, 0, '2025-03-29'),
+(1, 'R 250 15KGS', 'ROYAL 250 (15KG)', 15, 0, 1, 1, '', 1, 0, '2025-03-29'),
 (2, 'R 250 30KGS', 'ROYAL 250 (30KGS)', 30, 0, 2, 1, NULL, 1, 0, NULL),
 (3, 'R 100 15KG', 'ROYAL 100', 15, 0, 1, 1, NULL, 1, 0, NULL),
 (4, 'R 100 30KGS', 'ROYAL 100', 30, 0, 2, 1, NULL, 1, 0, NULL),
@@ -69,6 +69,27 @@ INSERT INTO `aimo_item` (`id`, `item_name`, `print_name`, `item_qty`, `alt_qty`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `aimo_order`
+--
+
+CREATE TABLE `aimo_order` (
+  `id` int(11) NOT NULL,
+  `order_date` date DEFAULT NULL,
+  `pending_party` int(11) NOT NULL,
+  `no_of_bags` int(11) NOT NULL,
+  `note` text DEFAULT NULL,
+  `no_of_coupon` int(11) NOT NULL,
+  `t_weight` decimal(10,2) DEFAULT NULL,
+  `vehicle_no` varchar(255) DEFAULT NULL,
+  `item` longtext DEFAULT NULL,
+  `deleteStatus` tinyint(1) DEFAULT 0,
+  `deletedAt` date DEFAULT NULL,
+  `dispatched_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `aimo_party`
 --
 
@@ -82,14 +103,19 @@ CREATE TABLE `aimo_party` (
   `deletedAt` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `aimo_party`
+-- Table structure for table `aimo_tick_order`
 --
 
-INSERT INTO `aimo_party` (`id`, `party_name`, `party_phone`, `address`, `status`, `deleteStatus`, `deletedAt`) VALUES
-(1, 'Saijuma gorgia 2', '5698409675', 'db vsf', 1, 0, '2025-03-29'),
-(2, 'Haruki Aimo', NULL, 'Sitoka, minaka 203994 Japan', 1, 0, NULL),
-(3, 'Saijuma gorgia', '954903957843', 'whrfed', 1, 0, NULL);
+CREATE TABLE `aimo_tick_order` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL DEFAULT 0,
+  `item_id` int(11) NOT NULL DEFAULT 0,
+  `createdAt` date DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -146,9 +172,21 @@ ALTER TABLE `aimo_item`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `aimo_order`
+--
+ALTER TABLE `aimo_order`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `aimo_party`
 --
 ALTER TABLE `aimo_party`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `aimo_tick_order`
+--
+ALTER TABLE `aimo_tick_order`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -174,10 +212,16 @@ ALTER TABLE `aimo_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `aimo_order`
+--
+ALTER TABLE `aimo_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `aimo_party`
 --
 ALTER TABLE `aimo_party`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `aimo_users`
