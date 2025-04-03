@@ -134,6 +134,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
 					</div>
 				</div>
 			</div>
+                                            </div>
         <!-- /product list -->
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
