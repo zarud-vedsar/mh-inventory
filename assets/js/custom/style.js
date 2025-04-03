@@ -53,6 +53,8 @@ $(document).ready(function () {
   delete_table('.delete-party', 4);
   delete_recycle('.recover-party', 4);
 
+  checkbx_status(".checklist")
+
   delete_table('.delete-item-order', 5);
   delete_recycle('.recover-item-order', 5);
   /*----------------------------------------------------------------------------

@@ -47,6 +47,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
         width: 35%;
         margin: 20px auto 0 0;
         border-bottom: 2px solid #ccc;
+        font-size: 1.2rem;
     }
 
     p {
@@ -100,7 +101,12 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                     if ($decoded) {
                                         $sr = 1;
                                         foreach ($decoded as $d) {
-                                            $itemName = $action->db->sql("SELECT item_name, print_name FROM aimo_item WHERE id = {$d['item_id']}");
+                                            $checked=[];
+                                            $itemName = $action->db->sql("SELECT item_name, print_name FROM aimo_item i WHERE id = {$d['item_id']}");
+                                            $checked= $action->db->sql("SELECT `id`,`status` FROM `aimo_tick_order` WHERE `order_id`='{$order_item[0]['id']}' AND `item_id`='{$d['item_id']}'");
+                                            
+
+                                            
                                             ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
@@ -111,12 +117,13 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                                 <td><?= base64_decode($d['remark']); ?></td>
                                                 <td>
                                                     <div class="form-check mb-0">
-                                                        <input class="form-check-input mx-0" style="float: none;" type="checkbox"
-                                                            value="" id="flexCheckChecked" checked>
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <input class="form-check-input checklist mx-0" style="float: none;" type="checkbox"
+                                                            <?= (@$checked[0]['status']== 1)? 'checked': '' ?> id="flexCheckChecked<?= $i ?>" data-itemid="<?=  $d['item_id'] ?>" data-orderid="<?= $order_item[0]['id'] ?>" data-checkid="<?= (@$checked[0]['id'])?:'na' ?>" >
+                                                        <label class="form-check-label" for="flexCheckChecked<?= $i ?>">
 
                                                         </label>
                                                     </div>
+                                                   
                                                 </td>
                                             </tr>
                                         <?php }
@@ -167,5 +174,5 @@ require_once('./common/footer.php');
                 .save('receipt-.pdf');
         });
     });
-    // setTimeout(() => window.print(), 200);
+    setTimeout(() => window.print(), 200);
 </script>
