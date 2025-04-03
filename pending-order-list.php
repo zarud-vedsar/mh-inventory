@@ -201,6 +201,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                 $party = $action->db->validateGetData('party');
                                 $sql .= " AND aimo_order.pending_party = '{$party}'";
                             }
+                             $sql .= " ORDER BY aimo_order.id DESC";
                               $orderlisting = $action->db->sql($sql);
                             if($orderlisting){
 
@@ -233,7 +234,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
 														class="p-2 border-0 bg-transparent">
 														<i data-feather="edit" class="feather-edit text-warning"></i>
 													</a>
-												<?php }
+												 <?php }
 												if ($deleteStatus == 1) { ?>
 													<button type="button" class="p-2 border-0 bg-transparent recover-item-order"
 														data-delid="<?= @$od['id']; ?>">
