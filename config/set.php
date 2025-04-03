@@ -107,7 +107,7 @@ function delete_recycle()
     }
 
     $table_name = $action->db->getTable($table_code);
-    $success = $action->db->update($table_name, "id = '{$id}'", ['deleteStatus' => 0]);
+    $success = $action->db->update($table_name, "id = '{$id}'", ['deleteStatus' => 0, 'deletedAt' => null]);
 
     echo json_encode([
         'status' => $success ? 1 : 2,
@@ -141,30 +141,29 @@ function check_status()
 function checkbx_status()
 {
     global $action;
-    
-    
+
+
 
     $status = isset($_POST['inactive']) ? 0 : (isset($_POST['active']) ? 1 : null);
     $id = $action->db->sanitizeClientInput($_POST['inactive'] ?? $_POST['active'] ?? '');
     $orderid = $action->db->sanitizeClientInput($_POST['orderid'] ?? 0);
     $itemid = $action->db->sanitizeClientInput($_POST['itemid'] ?? 0);
-    if (is_null($status) || !$id ) {
+    if (is_null($status) || !$id) {
         echo $action->db->json(4, "Invalid request.");
         return;
     }
 
-    if($id=='na'){
-        $checkExist=$action->db->sql("SELECT `id` FROM `aimo_tick_order` WHERE `order_id`='$orderid' AND `item_id`='$itemid'");
-        if($checkExist){
+    if ($id == 'na') {
+        $checkExist = $action->db->sql("SELECT `id` FROM `aimo_tick_order` WHERE `order_id`='$orderid' AND `item_id`='$itemid'");
+        if ($checkExist) {
             $success = $action->db->update("aimo_tick_order", "id = '{$checkExist[0]['id']}'", ['status' => $status]);
-        }else{
+        } else {
 
-            $success= $action->db->insert("aimo_tick_order",['order_id'=>$orderid,'item_id'=>$itemid,'status'=>$status]);
+            $success = $action->db->insert("aimo_tick_order", ['order_id' => $orderid, 'item_id' => $itemid, 'status' => $status]);
         }
-    }
-    else{
+    } else {
 
-        
+
         $success = $action->db->update("aimo_tick_order", "id = '{$id}'", ['status' => $status]);
     }
 

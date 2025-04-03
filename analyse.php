@@ -97,7 +97,7 @@ require_once('./common/sidebar.php');
                                     <?php
                                     if ($action->db->validateGetData('dispatched_date')) {
                                         $dispatched_date = $action->db->validateGetData('dispatched_date');
-                                        $order = $action->db->sql("SELECT item FROM aimo_order WHERE dispatched_date = '{$dispatched_date}'");
+                                        $order = $action->db->sql("SELECT item FROM aimo_order WHERE dispatched_date = '{$dispatched_date}' AND deleteStatus = 0");
 
                                         $items = [];
 
