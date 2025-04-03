@@ -185,17 +185,17 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                             if(isset($_GET['dispatched_status'])){ 
                                 $dispatched_status = $_GET['dispatched_status'];
                                 if($dispatched_status == 0 || $dispatched_status == ""){
-                                    $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date IS NULL OR aimo_order.dispatched_date = '')";
+                                    $sql .= " AND (aimo_order.status = '0' )";
                                 }
                                 if($dispatched_status == 1){
-                                    $sql .= " AND aimo_order.dispatched_date != '0000-00-00'";
+                                    $sql .= " AND aimo_order.status ='1'";
                                 }
                                 if($dispatched_status == "all"){
-                                    $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date != '0000-00-00')";
+                                    $sql .= " AND (aimo_order.status= '1' || aimo_order.status='0')";
                                 }
 
                             }else{
-                                $sql .= " AND (aimo_order.dispatched_date = '0000-00-00' OR aimo_order.dispatched_date IS NULL OR aimo_order.dispatched_date = '')";
+                                $sql .= " AND (aimo_order.status = '0')";
                             }
                             if($action->db->validateGetData('party')){
                                 $party = $action->db->validateGetData('party');
@@ -214,12 +214,20 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                <td class="text-gray-9"><?= $od['party_name'];?></td>
                                <td>
                                  <?php 
-                                  if(empty($od['dispatched_date']) || $od['dispatched_date'] == '0000-00-00'){
-                                       echo "<span class='text-warning'> Pending <span>";
-                                  }else{
-                                    echo "<span class='text-success'> Dispatched <span>";
-                                  }
+                                //   if(empty($od['dispatched_date']) || $od['dispatched_date'] == '0000-00-00'){
+                                //        echo "<span class='text-warning'> Pending <span>";
+                                //   }else{
+                                //     echo "<span class='text-success'> Dispatched <span>";
+                                //   }
+                                
                                  ?>
+                                 <div class="form-check form-switch">
+                                    <input class="form-check-input dispatchstatus" type="checkbox" <?php if ($od['status'] == 1) {
+                                        echo "checked";
+                                    } ?> data-checkid="<?= @$od['id']; ?>"
+                                        role="switch" id="checkedOrNot_<?= $sr; ?>">
+                                    <label class="form-check-label" for="checkedOrNot_<?= $sr; ?>"></label>
+                                </div>
                                </td>
                                <td class="text-gray-9"><?= $action->db->indiandate($od['dispatched_date']); ?></td> 
                                <td class="action-table-data d-flex align-items-center">

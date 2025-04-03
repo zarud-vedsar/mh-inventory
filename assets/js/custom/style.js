@@ -41,6 +41,7 @@ $(document).ready(function () {
   /*----------------------------------------------------------------------------
                   -- Widget Setting Show Or Hide --
   --------------------------------------------------------------------------- */
+  check_status(".dispatchstatus", 5);
   check_status(".off_warehouse", 2);
   delete_table('.delete-warehouse', 2);
   delete_recycle('.recover-warehouse', 2);
