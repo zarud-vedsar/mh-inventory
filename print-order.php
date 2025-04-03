@@ -67,6 +67,10 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
     <div class="row">
         <div class="col-md-10 px-0 text-end">
             <!-- <button id="download" class="btn btn-primary">Download as PDF</button> -->
+             
+            <a href="./pending-order-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i></i>
+            Order List</a>
+            <a href="#" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
         </div>
     </div>
     <div class="content">
