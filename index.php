@@ -13,7 +13,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $twerehouse = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_warehouse");
+											 $twerehouse = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_warehouse WHERE deleteStatus = 0");
 											  echo @$twerehouse[0]['total'] ?: 0;
 											?>
 										</h4>
@@ -35,7 +35,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $titem = $action->db->sql("SELECT COUNT(id) AS'total' FROM aimo_item");
+											 $titem = $action->db->sql("SELECT COUNT(id) AS'total' FROM aimo_item WHERE deleteStatus = 0");
 											  echo @$titem[0]['total'] ?: 0;
 											?>
 										</h4>
@@ -58,7 +58,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $tparty = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_party");
+											 $tparty = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_party WHERE deleteStatus = 0");
 											  echo @$tparty[0]['total'] ?: 0;
 											?>
 										</h4>
@@ -81,7 +81,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $tpendingOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order");
+											 $tpendingOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE deleteStatus = 0");
 											  echo @$tpendingOrder[0]['total'] ?: 0;
 											?>
 										</h4>
@@ -103,7 +103,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $tdispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE status = '1' ");
+											 $tdispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE status = 1 AND deleteStatus = 0");
 											  echo @$tdispatchedOrder[0]['total'] ?: 0;
 											?>
 										</h4>
