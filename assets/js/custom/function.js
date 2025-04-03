@@ -228,6 +228,56 @@ function check_status(button_class, table_name_tb) {
 }
 
 
+function checkbx_status(button_class) {
+  $(document).on("click", button_class, function () {
+    if ($(this).prop("checked") == true) {
+      let active = $(this).data("checkid");
+      let itemid = $(this).data("itemid");
+      let orderid = $(this).data("orderid");
+      
+      let checkbx_status = "checkbx_status";
+      $.ajax({
+        url: path_set,
+        type: "POST",
+        data: { active: active,  data: checkbx_status, orderid: orderid,
+          itemid: itemid },
+        success: function (data) {
+          let json11 = JSON.parse(data);
+          if (json11.status == 1) {
+            swaMsg("success", json11.msg, "#0F843F");
+          } else if (json11.status == 2) {
+            swaMsg("error", json11.msg, "#a90228");
+          }
+        },
+      });
+    } else if ($(this).prop("checked") == false) {
+      let inactive = $(this).data("checkid");
+      let itemid = $(this).data("itemid");
+      let orderid = $(this).data("orderid");
+      let checkbx_status = "checkbx_status";
+      $.ajax({
+        url: path_set,
+        type: "POST",
+        data: {
+          inactive: inactive,
+          orderid: orderid,
+          itemid: itemid,
+          data: checkbx_status,
+        },
+        success: function (data) {
+          let json12 = JSON.parse(data);
+          if (json12.status == 3) {
+            swaMsg("success", json12.msg, "#0F843F");
+          } else if (json12.status == 4) {
+            swaMsg("error", json12.msg, "#a90228");
+          }
+        },
+      });
+    }
+  });
+}
+
+
 function check_status1(button_class, table_name_tb, type) {
   $(document).on("click", button_class, function () {
     if ($(this).prop("checked") == true) {

@@ -137,6 +137,42 @@ function check_status()
         $success ? "Status " . ($status ? "active" : "inactive") . " successfully." : "An error occurred. Please try again later."
     );
 }
+
+function checkbx_status()
+{
+    global $action;
+    
+    
+
+    $status = isset($_POST['inactive']) ? 0 : (isset($_POST['active']) ? 1 : null);
+    $id = $action->db->sanitizeClientInput($_POST['inactive'] ?? $_POST['active'] ?? '');
+    $orderid = $action->db->sanitizeClientInput($_POST['orderid'] ?? 0);
+    $itemid = $action->db->sanitizeClientInput($_POST['itemid'] ?? 0);
+    if (is_null($status) || !$id ) {
+        echo $action->db->json(4, "Invalid request.");
+        return;
+    }
+
+    if($id=='na'){
+        $checkExist=$action->db->sql("SELECT `id` FROM `aimo_tick_order` WHERE `order_id`='$orderid' AND `item_id`='$itemid'");
+        if($checkExist){
+            $success = $action->db->update("aimo_tick_order", "id = '{$checkExist[0]['id']}'", ['status' => $status]);
+        }else{
+
+            $success= $action->db->insert("aimo_tick_order",['order_id'=>$orderid,'item_id'=>$itemid,'status'=>$status]);
+        }
+    }
+    else{
+
+        
+        $success = $action->db->update("aimo_tick_order", "id = '{$id}'", ['status' => $status]);
+    }
+
+    echo $action->db->json(
+        $success ? ($status ? 1 : 3) : ($status ? 2 : 4),
+        $success ? "Item " . ($status ? "Checked" : "Unchecked") . " successfully." : "An error occurred. Please try again later."
+    );
+}
 // FETCH JSON WAREHOUSE DATA
 function fetchWareHouseJson()
 {
