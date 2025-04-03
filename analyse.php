@@ -35,21 +35,6 @@ require_once('./common/sidebar.php');
                             <div class="col-md-9">
                                 <form method="get">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="item_name" class="form-label">Select Item <span
-                                                    class="text-danger">*</span></label>
-                                            <select name="item_id" required class="select2 form-select item_id">
-                                                <option value="">Select</option>
-                                                <?php
-                                                $fetchItemDropdown = $action->get_admin_function->fetchItemDropdown();
-                                                if ($fetchItemDropdown) {
-                                                    foreach ($fetchItemDropdown as $item) { ?>
-                                                        <option value="<?= $item['id']; ?>"><?= $item['item_name']; ?>
-                                                            (<?= $item['print_name']; ?>)</option>
-                                                    <?php }
-                                                } ?>
-                                            </select>
-                                        </div>
                                         <div class="col-md-4">
                                             <label class="form-label">Dispatched Date <span
                                                     class="text-danger">*</span></label>
@@ -59,7 +44,7 @@ require_once('./common/sidebar.php');
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                            <button type="submit" class="btn btn-primary mt-4">Apply</button>
+                                            <button type="submit" class="btn btn-primary mt-4">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -95,28 +80,49 @@ require_once('./common/sidebar.php');
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($action->db->validateGetData('item_id') && $action->db->validateGetData('dispatched_date')) {
+                                    if ($action->db->validateGetData('dispatched_date')) {
                                         $dispatched_date = $action->db->validateGetData('dispatched_date');
-                                        $item_id = $action->db->validateGetData('item_id');
-                                        $qty = $action->db->sql("SELECT SUM(CAST(JSON_UNQUOTE(JSON_EXTRACT(item, '$[0].item_qty')) AS UNSIGNED)) AS total_item_qty
-FROM aimo_order
-WHERE dispatched_date = '2025-04-09'
-  AND JSON_UNQUOTE(JSON_EXTRACT(item, '$[0].item_id')) = '1'
-UNION ALL
-SELECT 
-    SUM(CAST(JSON_UNQUOTE(JSON_EXTRACT(item, '$[1].item_qty')) AS UNSIGNED)) AS total_item_qty
-FROM aimo_order
-WHERE dispatched_date = '{$dispatched_date}'
-  AND JSON_UNQUOTE(JSON_EXTRACT(item, '$[1].item_id')) = {$item_id}");
-                                        $itemName = $action->db->sql("SELECT item_name FROM aimo_item WHERE id = {$item_id}");
+                                        $order = $action->db->sql("SELECT item FROM aimo_order WHERE dispatched_date = '{$dispatched_date}'");
+
+                                        $items = [];
+
+                                        if ($order) {
+                                            foreach ($order as $item) {
+                                                // Decode JSON correctly
+                                                $decoded = json_decode($item['item'], true);
+
+                                                if ($decoded) {
+                                                    foreach ($decoded as $d) {
+                                                        $item_id = $d['item_id'];
+                                                        $item_qty = $d['item_qty'];
+
+                                                        if (isset($items[$item_id])) {
+                                                            $items[$item_id] += $item_qty; // Fix: Correct summing
+                                                        } else {
+                                                            $items[$item_id] = $item_qty; // Fix: Correct initialization
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
+                                    if (isset($items) && $items) {
+                                        $sr = 1;
+                                        foreach ($items as $t => $v) {
+                                            $itemName = $action->db->sql("SELECT item_name FROM aimo_item WHERE id = {$t}");
+                                            ?>
+                                            <tr>
+                                                <td><?= $sr++; ?></td>
+                                                <td><?= @$itemName[0]['item_name']; ?></td>
+                                                <td><?= $action->db->indiandate(@$dispatched_date); ?></td>
+                                                <td><?= @$v; ?></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    }
+
                                     ?>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><?php echo @$itemName[0]['item_name']; ?></td>
-                                        <td><?= $action->db->indiandate($dispatched_date); ?></td>
-                                        <td><?php echo @$qty[0]['total_item_qty']; ?></td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
