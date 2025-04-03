@@ -46,7 +46,6 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                             <tr>
                                 <th>#</th>
                                 <th>Warehouse</th>
-                                <th>Total Items</th>
                                 <th class="no-sort">Action</th>
                             </tr>
                         </thead>
@@ -61,8 +60,6 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                     <tr>
                                         <td><?= $sr; ?></td>
                                         <td class="text-gray-9"><a href=""><?= $wd['wtitle']; ?></a></td>
-                                        <td>
-                                        </td>
                                         <td class="action-table-data d-flex align-items-center">
                                             <?php if (!$recycle) { ?>
                                                 <div class="form-check form-switch">

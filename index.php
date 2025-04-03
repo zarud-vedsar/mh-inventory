@@ -103,7 +103,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $tdispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE dispatched_date != '' AND dispatched_date != '0000-00-00' AND dispatched_date IS NOT NULL");
+											 $tdispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE status = '1' ");
 											  echo @$tdispatchedOrder[0]['total'] ?: 0;
 											?>
 										</h4>
@@ -126,7 +126,7 @@ require_once('./common/sidebar.php'); ?>
 									<div>
 										<h4 class="mb-1">
 											<?php 
-											 $dispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE dispatched_date = '' OR dispatched_date = '0000-00-00' OR dispatched_date IS NULL");
+											 $dispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE status= '0'");
 											  echo @$dispatchedOrder[0]['total'] ?: 0;
 											?>
 										</h4>
