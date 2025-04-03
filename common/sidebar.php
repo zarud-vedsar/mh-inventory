@@ -24,10 +24,16 @@
 							<a href="index.php"><i data-feather="home"
 									class="feather-16 me-2"></i><span>Dashboard</span></a>
 						</li>
-						<li>
-							<a href="warehouse.php"><i data-feather="archive"
-									class="feather-16 me-2"></i><span>Warehouse</span></a>
+						<li class="submenu">
+							<a href="javascript:void(0);"><i data-feather="shopping-cart"
+									class="feather-16 me-2"></i><span>Order Management</span><span
+									class="menu-arrow"></span></a>
+							<ul>
+								<li><a href="./pending-orders.php">Pending Orders</a></li>
+								<li><a href="./pending-order-list.php">Pending Order List</a></li>
+							</ul>
 						</li>
+						
 						<li>
 							<a href="analyse.php"><i data-feather="bar-chart" class="feather-16 me-2"></i><span>Analyse
 									Order</span></a>
@@ -51,14 +57,9 @@
 								<li><a href="./party-list.php">Party List</a></li>
 							</ul>
 						</li>
-						<li class="submenu">
-							<a href="javascript:void(0);"><i data-feather="shopping-cart"
-									class="feather-16 me-2"></i><span>Order Management</span><span
-									class="menu-arrow"></span></a>
-							<ul>
-								<li><a href="./pending-orders.php">Pending Orders</a></li>
-								<li><a href="./pending-order-list.php">Pending Order List</a></li>
-							</ul>
+						<li>
+							<a href="warehouse.php"><i data-feather="archive"
+									class="feather-16 me-2"></i><span>Warehouse</span></a>
 						</li>
 				</li>
 

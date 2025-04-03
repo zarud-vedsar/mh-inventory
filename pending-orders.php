@@ -25,7 +25,7 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
                         $fetchItemDropdown = $action->get_admin_function->fetchItemDropdown();
                         if ($fetchItemDropdown) {
                             foreach ($fetchItemDropdown as $item) { ?>
-                                <option value="<?= $item['id']; ?>"><?= $item['item_name']; ?> (<?= $item['print_name']; ?>)</option>
+                                <option value="<?= $item['id']; ?>"><?= $item['item_name']; ?></option>
                             <?php }
                         } ?>
                     </select>
@@ -197,7 +197,7 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
                                                                                         $fetchItemDropdown = $action->get_admin_function->fetchItemDropdown();
                                                                                         if ($fetchItemDropdown) {
                                                                                             foreach ($fetchItemDropdown as $item) { ?>
-                                                                                            <option <?= $item['id'] == $d['item_id'] ? 'selected':'';?> value="<?= $item['id']; ?>"><?= $item['item_name']; ?> (<?= $item['print_name']; ?>)</option>
+                                                                                            <option <?= $item['id'] == $d['item_id'] ? 'selected':'';?> value="<?= $item['id']; ?>"><?= $item['item_name']; ?></option>
                                                                                         <?php }
                                                                                         } ?>
                                                                                 </select>
