@@ -14,13 +14,13 @@ require_once("./config/autoload.php");
 	<script src="assets/js/theme-script.js" type="75609a56d6118f4e48ec36dc-text/javascript"></script>
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/mh-logo.jpeg">
 
 	<!-- Apple Touch Icon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/mh-logo.jpeg">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css"> 
 
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
