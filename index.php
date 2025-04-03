@@ -58,7 +58,7 @@ deletefiveYearOld("aimo_warehouse");
        									</div>
 									<span class="revenue-icon bg-orange-transparent text-orange">
 									    <i class="fa-solid fas fa-box fs-16"></i>
-									</span>
+									</span> 
                               	</div>
 							</div>
 						</div>
