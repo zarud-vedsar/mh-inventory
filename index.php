@@ -3,10 +3,145 @@ require_once('./common/header.php');
 require_once('./common/sidebar.php'); ?>
 <div class="page-wrapper">
 	<div class="content">
+       <div class="container">
+		<div class="row">
+		<div class="col-xl-3 col-sm-6 col-12 d-flex">
+					<a href="./warehouse.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $twerehouse = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_warehouse");
+											  echo @$twerehouse[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>Warehouse</p>
+									</div>
+									<span class="revenue-icon bg-cyan-transparent text-cyan">
+										<i class="fa-solid fas fa-warehouse fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+					  </a>
+					</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<a href="./party-list.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $titem = $action->db->sql("SELECT COUNT(id) AS'total' FROM aimo_item");
+											  echo @$titem[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>Item</p>
+       									</div>
+									<span class="revenue-icon bg-orange-transparent text-orange">
+									    <i class="fa-solid fas fa-box fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+                       </a>
+					</div>
 
-		<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-2">
-			
-		</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<a href="./product-list.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $tparty = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_party");
+											  echo @$tparty[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>Party</p>
+                                     </div>
+									 <span class="revenue-icon bg-teal-transparent text-teal">
+									   <i class="fas fa-users fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+                		</a>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<a href="./pending-order-list.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $tpendingOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order");
+											  echo @$tpendingOrder[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>Pending Order</p>
+                                     </div>
+									<span class="revenue-icon bg-indigo-transparent text-indigo">
+										<i class="fas fa-hourglass-half fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+                		</a>
+					</div>
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<a href="./pending-order-list.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $tdispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE dispatched_date != '' AND dispatched_date != '0000-00-00' AND dispatched_date IS NOT NULL");
+											  echo @$tdispatchedOrder[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>Dispatched Order</p>
+                                     </div>
+									<span class="revenue-icon bg-teal-transparent text-teal">
+										<i class="fas fa-truck fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+                		</a>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 d-flex">
+						<a href="./pending-order-list.php" class="w-100">
+						<div class="card revenue-widget flex-fill">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between"> 
+									<div>
+										<h4 class="mb-1">
+											<?php 
+											 $dispatchedOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE dispatched_date = '' OR dispatched_date = '0000-00-00' OR dispatched_date IS NULL");
+											  echo @$dispatchedOrder[0]['total'] ?: 0;
+											?>
+										</h4>
+										<p>To Be Dispatched</p>
+                                     </div>
+									<span class="revenue-icon bg-warning-transparent text-warning">
+										<i class="fas fa-box-open fs-16"></i>
+									</span>
+                              	</div>
+							</div>
+						</div>
+                		</a>
+					</div>
+         </div>
+        </div>
 	</div>
 	<div class="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
 		<p class="fs-13 text-gray-9 mb-0"><span id="year"></span> &copy; All Right Reserved</p>
