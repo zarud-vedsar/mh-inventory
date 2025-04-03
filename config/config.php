@@ -29,13 +29,13 @@ class Database
     ];
     return isset($tables[$index]) ? $tables[$index] : null;
   }
-    public function indiandate($date)
-    {
-      if(!$date || $date == '0000-00-00'){
-        return false;
-      }
-      return date('d/m/Y', strtotime($date));
+  public function indiandate($date)
+  {
+    if (!$date || $date == '0000-00-00') {
+      return false;
     }
+    return date('d/m/Y', strtotime($date));
+  }
   /**
    * Database constructor initializes the connection.
    */
@@ -389,12 +389,7 @@ class Database
     $args = array();
     $table = $this->sanitizeClientInput($table);
     foreach ($para as $key => $value) {
-
-      if ($value == 'null' || $value == 'NULL') {
-        $args[] = " $key = null ";
-      } else {
-        $args[] = " $key = '$value' ";
-      }
+      $args[] = " $key = '$value' ";
     }
     $sql11 = "UPDATE  $table SET " . implode(',', $args);
     $sql11 .= " WHERE $id";
@@ -406,6 +401,7 @@ class Database
       $stmt->execute();
       return true;  // Update successful
     } catch (PDOException $e) {
+      print_r($e->getMessage());
       return false;
     }
   }

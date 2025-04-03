@@ -151,7 +151,11 @@ function save_item()
     $item_name = $action->db->validatePostData('item_name') ?: null;
     $print_name = $action->db->validatePostData('print_name') ?: null;
     $item_qty = $action->db->validatePostData('item_qty') ?: 0;
-    $alt_qty = $action->db->validatePostData('alt_qty') ?: 0;
+    if (isset($_POST['alt_qty']) && !empty($_POST['alt_qty'])) {
+        $alt_qty = $action->db->sanitizeClientInput($_POST['alt_qty']);
+    } else {
+        $alt_qty = 0;
+    }
     $coupon_point = $action->db->validatePostData('coupon_point') ?: 0;
     $warehouseid = $action->db->setPostRequiredField('warehouseid', 'Warehouse is required');
     if (!$warehouseid) {
