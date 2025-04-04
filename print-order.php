@@ -61,7 +61,8 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
         margin-bottom: 5px;
         color: #000;
     }
-    .note{
+
+    .note {
         font-size: 1.2rem;
         margin-top: 20px;
         margin-bottom: 0;
@@ -74,7 +75,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
             <a href="#" class="btn btn-orange" id="print"><i class="fas fa-print me-1"></i> Print</a>
 
             <a href="./pending-order-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i>
-            Order List</a>
+                Order List</a>
             <a href="#" class="btn btn-secondary" id="back"><i data-feather="arrow-left" class="me-2"></i>Back</a>
         </div>
     </div>
@@ -107,12 +108,20 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                     $decoded = json_decode($order_item[0]['item'], true);
                                     // echo "<pre>";
                                     // print_r($decoded);
+                                    $items = [];
                                     if ($decoded) {
                                         $sr = 1;
                                         foreach ($decoded as $d) {
-                                            $checked=[];
+                                            $checked = [];
                                             $itemName = $action->db->sql("SELECT item_name, print_name FROM aimo_item i WHERE id = {$d['item_id']}");
-                                            $checked= $action->db->sql("SELECT `id`,`status` FROM `aimo_tick_order` WHERE `order_id`='{$order_item[0]['id']}' AND `item_id`='{$d['item_id']}'");
+                                            $checked = $action->db->sql("SELECT `id`,`status` FROM `aimo_tick_order` WHERE `order_id`='{$order_item[0]['id']}' AND `item_id`='{$d['item_id']}'");
+                                            $warehouseid = $d['warehouseid'];
+                                            $item_qty = $d['item_qty'];
+                                            if (isset($items[$warehouseid])) {
+                                                $items[$warehouseid] += $item_qty * $d['item_kg']; // Fix: Correct summing
+                                            } else {
+                                                $items[$warehouseid] = $item_qty * $d['item_kg']; // Fix: Correct initialization
+                                            }
                                             ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
@@ -123,13 +132,16 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                                 <td><?= base64_decode($d['remark']); ?></td>
                                                 <td>
                                                     <div class="form-check mb-0">
-                                                        <input class="form-check-input checklist mx-0" style="float: none;" type="checkbox"
-                                                            <?= (@$checked[0]['status']== 1)? 'checked': '' ?> id="flexCheckChecked<?= $i ?>" data-itemid="<?=  $d['item_id'] ?>" data-orderid="<?= $order_item[0]['id'] ?>" data-checkid="<?= (@$checked[0]['id'])?:'na' ?>" >
+                                                        <input class="form-check-input checklist mx-0" style="float: none;"
+                                                            type="checkbox" <?= (@$checked[0]['status'] == 1) ? 'checked' : '' ?>
+                                                            id="flexCheckChecked<?= $i ?>" data-itemid="<?= $d['item_id'] ?>"
+                                                            data-orderid="<?= $order_item[0]['id'] ?>"
+                                                            data-checkid="<?= (@$checked[0]['id']) ?: 'na' ?>">
                                                         <label class="form-check-label" for="flexCheckChecked<?= $i ?>">
 
                                                         </label>
                                                     </div>
-                                                   
+
                                                 </td>
                                             </tr>
                                         <?php }
@@ -138,17 +150,35 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                             </tbody>
                         </table>
                         <div class="row">
-                          <div class="col-md-5">
-                          <p class="total">Total No. Of Bags: <strong><?= @$order_item[0]['no_of_bags']; ?></strong></p>
-                        <p class="total">Total No. Of Coupon: <strong><?= @$order_item[0]['no_of_coupon']; ?></strong>
-                        </p>
-                        <p class="total">Total Kgs: <strong><?= @$order_item[0]['t_weight']; ?></strong></p>
-                        <p class="total"> Transport/Lorry No: <strong><?= @$order_item[0]['vehicle_no']; ?></strong></p>
-                          </div>
-                          <div class="col-md-6 ms-auto">
-                            <p class="note">Note:-<p><?= @$order_item[0]['note']; ?></p></p>
+                            <div class="col-md-5">
+                                <p class="total">Total No. Of Bags:
+                                    <strong><?= @$order_item[0]['no_of_bags']; ?></strong>
+                                </p>
+                                <p class="total">Total No. Of Coupon:
+                                    <strong><?= @$order_item[0]['no_of_coupon']; ?></strong>
+                                </p>
+                                <p class="total">Total Kgs: <strong><?= @$order_item[0]['t_weight']; ?></strong></p>
+                                <?php
+                                if (isset($items) && $items) {
+                                    $sr = 1;
+                                    foreach ($items as $t => $v) {
+                                        $wname = $action->db->sql("SELECT wtitle FROM aimo_warehouse WHERE id = {$t}");
+                                        ?>
+                                        <p class="total"><?= @$wname[0]['wtitle']; ?>: <strong><?= @$v; ?></strong></p>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                <p class="total"> Transport/Lorry No:
+                                    <strong><?= @$order_item[0]['vehicle_no']; ?></strong>
+                                </p>
                             </div>
-                         </div>
+                            <div class="col-md-6 ms-auto">
+                                <p class="note">Note:-
+                                <p><?= @$order_item[0]['note']; ?></p>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,11 +217,11 @@ require_once('./common/footer.php');
                 .save('receipt-.pdf');
         });
     });
-         document.getElementById('print').addEventListener('click', function(){
-            window.print();
-         });
+    document.getElementById('print').addEventListener('click', function () {
+        window.print();
+    });
 
-         document.getElementById('back').addEventListener('click', function(){
-            window.history.back();
-         });
+    document.getElementById('back').addEventListener('click', function () {
+        window.history.back();
+    });
 </script>
