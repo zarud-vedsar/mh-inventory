@@ -11,8 +11,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4 class="fw-bold">Pending Order List</h4>
-                    <h6>Manage pending orders</h6>
+                    <h4 class="fw-bold">Order List</h4>
                 </div>
             </div>
             <ul class="table-top-head">
@@ -25,8 +24,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
             <div class="am-page-upr-btn">
                 <div class="left-btn">
                     <div class="page-btn">
-                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>New
-                            Pending orders</a>
+                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Create New Order</a>
                     </div>
                     <div class="page-btn">
                         <?php if ($recycle) { ?>

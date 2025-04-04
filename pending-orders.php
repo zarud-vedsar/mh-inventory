@@ -84,7 +84,7 @@ if ($action->db->validateGetData('id') && filter_var($action->db->validateGetDat
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4 class="fw-bold">Pending Orders</h4>
+                    <h4 class="fw-bold">Orders</h4>
                     <h6><?= @$id ? 'Update Order' : 'Create New Order'; ?></h6>
                 </div>
             </div>

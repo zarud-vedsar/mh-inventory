@@ -113,13 +113,10 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                             $checked=[];
                                             $itemName = $action->db->sql("SELECT item_name, print_name FROM aimo_item i WHERE id = {$d['item_id']}");
                                             $checked= $action->db->sql("SELECT `id`,`status` FROM `aimo_tick_order` WHERE `order_id`='{$order_item[0]['id']}' AND `item_id`='{$d['item_id']}'");
-                                            
-
-                                            
                                             ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
-                                                <td><?= $itemName[0]['item_name']; ?>(<?= $itemName[0]['item_name']; ?>)</td>
+                                                <td><?= $itemName[0]['item_name']; ?> (<?= $itemName[0]['print_name']; ?>)</td>
                                                 <td><?= $d['item_qty']; ?></td>
                                                 <td>x</td>
                                                 <td><?= $d['item_kg']; ?></td>

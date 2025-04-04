@@ -29,8 +29,8 @@
 									class="feather-16 me-2"></i><span>Order Management</span><span
 									class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="./pending-orders.php">Pending Orders</a></li>
-								<li><a href="./pending-order-list.php">Pending Order List</a></li>
+								<li><a href="./pending-orders.php">Create New Order</a></li>
+								<li><a href="./pending-order-list.php"> Order List</a></li>
 							</ul>
 						</li>
 						

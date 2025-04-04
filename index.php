@@ -192,7 +192,7 @@ deletefiveYearOld("aimo_warehouse");
                             </a>
                         <?php } ?>
                 </div>
-						</div>
+				</div>
             </div>
         </div>
         <div class="accordion accordion-primary mb-2" id="accordionPrimaryExample">
