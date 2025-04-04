@@ -24,17 +24,17 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
             <div class="am-page-upr-btn">
                 <div class="left-btn">
                     <div class="page-btn">
-                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Create New Order</a>
+                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus fs-16 me-1"></i>Create New Order</a>
                     </div>
                     <div class="page-btn">
                         <?php if ($recycle) { ?>
                             <a href="./pending-order-list.php" class="btn btn-secondary">
-                                <i data-feather="eye-off"></i>
+                                <i data-feather="eye-off" class="fs-16"></i>
                                 Hide Recycle Bin
                             </a>
                         <?php } else { ?>
                             <a href="./pending-order-list.php?recycle=true" class="btn btn-danger">
-                                <i data-feather="trash-2"></i>
+                                <i data-feather="trash-2 fs-16"></i>
                                 Show Recycle Bin
                             </a>
                         <?php } ?>
@@ -219,8 +219,8 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                     ?>
                                     <tr>
                                         <td><?= $sr++; ?></td>
-                                        <td class="text-gray-9"><?= $action->db->indiandate($od['order_date']); ?></td>
-                                        <td class="text-gray-9"><?= $od['party_name']; ?></td>
+                                        <td class="text-gray-9"><a href="./print-order.php?oid=<?= $od['id']; ?>"><?= $action->db->indiandate($od['order_date']); ?></a></td>
+                                        <td class="text-gray-9"> <a href="./print-order.php?oid=<?= $od['id']; ?>"><?= $od['party_name']; ?></a></td>
                                         <td>
                                             <?php
                                             if ($od['status'] == 0) {
