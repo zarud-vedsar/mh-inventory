@@ -35,8 +35,7 @@
 						</li>
 						
 						<li>
-							<a href="analyse.php"><i data-feather="bar-chart" class="feather-16 me-2"></i><span>Analyse
-									Order</span></a>
+							<a href="analyse.php"><i data-feather="bar-chart" class="feather-16 me-2"></i><span>Production Plan</span></a>
 						</li>
 					</ul>
 					<ul>

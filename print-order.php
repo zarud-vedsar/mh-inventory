@@ -44,7 +44,6 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
         display: flex;
         justify-content: space-between;
         align-items: end;
-        width: 35%;
         margin: 20px auto 0 0;
         border-bottom: 2px solid #ccc;
         font-size: 1.2rem;
@@ -62,15 +61,21 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
         margin-bottom: 5px;
         color: #000;
     }
+    .note{
+        font-size: 1.2rem;
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
 </style>
 <div class="page-wrapper bg-light w-100 p-0 m-0">
     <div class="row">
         <div class="col-md-10 px-0 text-end">
             <!-- <button id="download" class="btn btn-primary">Download as PDF</button> -->
-             
-            <a href="./pending-order-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i></i>
+            <a href="#" class="btn btn-orange" id="print"><i class="fas fa-print me-1"></i> Print</a>
+
+            <a href="./pending-order-list.php" class="btn btn-info"><i class="fa-solid fa-list-ul me-1"></i>
             Order List</a>
-            <a href="#" class="btn btn-secondary"><i data-feather="arrow-left" class="me-2"></i>Back</a>
+            <a href="#" class="btn btn-secondary" id="back"><i data-feather="arrow-left" class="me-2"></i>Back</a>
         </div>
     </div>
     <div class="content">
@@ -88,11 +93,11 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                             <thead>
                                 <tr>
                                     <th style="width: 20px;">SL.NO.</th>
-                                    <th style="width: 100px;">ITEM NAME</th>
+                                    <th style="width: 130px;">ITEM NAME</th>
                                     <th style="width: 60px;">QTY</th>
                                     <th style="width: 30px;">x</th>
                                     <th style="width: 60px;">KG/QTY</th>
-                                    <th style="width: 130px;">REMARKS</th>
+                                    <th style="width: 100px;">REMARKS</th>
                                     <th style="width: 40px;">TICK</th>
                                 </tr>
                             </thead>
@@ -114,7 +119,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                             ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
-                                                <td><?= $itemName[0]['item_name']; ?></td>
+                                                <td><?= $itemName[0]['item_name']; ?>(<?= $itemName[0]['item_name']; ?>)</td>
                                                 <td><?= $d['item_qty']; ?></td>
                                                 <td>x</td>
                                                 <td><?= $d['item_kg']; ?></td>
@@ -135,11 +140,18 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                 } ?>
                             </tbody>
                         </table>
-                        <p class="total">Total No. Of Bags: <strong><?= @$order_item[0]['no_of_bags']; ?></strong></p>
+                        <div class="row">
+                          <div class="col-md-5">
+                          <p class="total">Total No. Of Bags: <strong><?= @$order_item[0]['no_of_bags']; ?></strong></p>
                         <p class="total">Total No. Of Coupon: <strong><?= @$order_item[0]['no_of_coupon']; ?></strong>
                         </p>
                         <p class="total">Total Kgs: <strong><?= @$order_item[0]['t_weight']; ?></strong></p>
                         <p class="total"> Transport/Lorry No: <strong><?= @$order_item[0]['vehicle_no']; ?></strong></p>
+                          </div>
+                          <div class="col-md-6 ms-auto">
+                            <p class="note">Note:-<p><?= @$order_item[0]['note']; ?></p></p>
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
@@ -178,5 +190,11 @@ require_once('./common/footer.php');
                 .save('receipt-.pdf');
         });
     });
-    setTimeout(() => window.print(), 200);
+         document.getElementById('print').addEventListener('click', function(){
+            window.print();
+         });
+
+         document.getElementById('back').addEventListener('click', function(){
+            window.history.back();
+         });
 </script>

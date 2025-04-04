@@ -8,7 +8,7 @@ require_once('./common/sidebar.php');
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4 class="fw-bold">Analyse Item Quantity</h4>
+                    <h4 class="fw-bold">Production Plan</h4>
                 </div>
             </div>
             <ul class="table-top-head">
