@@ -394,7 +394,7 @@ function pending_order_save()
     $pending_party = $action->db->setPostRequiredField('pending_party', 'Party field is required.');
     $note = $action->db->validatePostData('note') ?: '';
     $no_of_bags = $action->db->setPostRequiredField('no_of_bags', 'Total number of bags is required.');
-    $no_of_coupon = $action->db->validatePostData('no_of_coupon');
+    $no_of_coupon = $action->db->validatePostData('no_of_coupon') ?: 0;
     $t_weight = $action->db->setPostRequiredField('t_weight', 'Total kgs is required.');
     $vehicle_no = $action->db->validatePostData('vehicle_no') ?: '';
     $updateid = $action->db->validatePostData('updateid') ?: null;
