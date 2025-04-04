@@ -1,6 +1,21 @@
 <?php require_once('./common/head.php');
 require_once('./common/header.php');
-require_once('./common/sidebar.php'); ?>
+require_once('./common/sidebar.php'); 
+
+function deletefiveYearOld($table){
+	global $action;
+	$action->db->sql("DELETE FROM $table 
+						WHERE `deletedAt` IS NOT NULL 
+						AND `deletedAt` < DATE_SUB(NOW(), INTERVAL 5 YEAR);");
+}
+
+// delete 5 year older files 
+
+deletefiveYearOld("aimo_item");
+deletefiveYearOld("aimo_order");
+deletefiveYearOld("aimo_party");
+deletefiveYearOld("aimo_warehouse");
+?>
 <div class="page-wrapper">
 	<div class="content">
        <div class="container">
