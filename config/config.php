@@ -53,7 +53,7 @@ class Database
   private function setDatabaseParameters()
   {
     $this->username = ($this->httpHost === 'localhost' || $this->httpHost === 'siyoka.com') ? 'root' : 'bjnmtwhewy';
-    $this->password = ($this->httpHost === 'localhost' || $this->httpHost === 'siyoka.com') ? '' : 'r45cMK8RbW  ';
+    $this->password = ($this->httpHost === 'localhost' || $this->httpHost === 'siyoka.com') ? '' : 'r45cMK8RbW';
     $this->dbname = ($this->httpHost === 'localhost' || $this->httpHost === 'siyoka.com') ? 'mhinv' : 'bjnmtwhewy';
   }
 

@@ -35,21 +35,6 @@ require_once('./common/sidebar.php');
                             <div class="col-md-9">
                                 <form method="get">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="item_name" class="form-label">Select Item <span
-                                                    class="text-danger">*</span></label>
-                                            <select name="item_id" required class="select2 form-select item_id">
-                                                <option value="">Select</option>
-                                                <?php
-                                                $fetchItemDropdown = $action->get_admin_function->fetchItemDropdown();
-                                                if ($fetchItemDropdown) {
-                                                    foreach ($fetchItemDropdown as $item) { ?>
-                                                        <option value="<?= $item['id']; ?>"><?= $item['item_name']; ?>
-                                                            (<?= $item['print_name']; ?>)</option>
-                                                    <?php }
-                                                } ?>
-                                            </select>
-                                        </div>
                                         <div class="col-md-4">
                                             <label class="form-label">Dispatched Date <span
                                                     class="text-danger">*</span></label>
@@ -137,7 +122,6 @@ require_once('./common/sidebar.php');
                                     }
 
                                     ?>
-
                                 </tbody>
                             </table>
                         </div>
