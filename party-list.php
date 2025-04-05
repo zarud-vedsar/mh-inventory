@@ -84,7 +84,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
 									?>
 									<tr>
 										<td><?= $sr; ?></td>
-										<td class="text-gray-9"><?= $wd['party_name']; ?></td>
+										<td class="text-gray-9"><a href="pending-order-list.php?filter=true&party=<?= $wd['id'];?>"><?= $wd['party_name']; ?></a></td>
 										<td class="text-gray-9"><?= $wd['party_phone']; ?></td>
 										<td>
 											<div class="am-text-container">

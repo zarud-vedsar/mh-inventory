@@ -44,7 +44,7 @@ deletefiveYearOld("aimo_warehouse");
 					</a>
 				</div>
 				<div class="col-xl-3 col-sm-6 col-12 d-flex">
-					<a href="./party-list.php" class="w-100">
+					<a href="./product-list.php" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
 								<div class="d-flex align-items-center justify-content-between">
@@ -67,7 +67,7 @@ deletefiveYearOld("aimo_warehouse");
 				</div>
 
 				<div class="col-xl-3 col-sm-6 col-12 d-flex">
-					<a href="./product-list.php" class="w-100">
+					<a href="./party-list.php" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
 								<div class="d-flex align-items-center justify-content-between">
@@ -90,29 +90,7 @@ deletefiveYearOld("aimo_warehouse");
 				</div>
 
 				<div class="col-xl-3 col-sm-6 col-12 d-flex">
-					<a href="./pending-order-list.php" class="w-100">
-						<div class="card revenue-widget flex-fill">
-							<div class="card-body">
-								<div class="d-flex align-items-center justify-content-between">
-									<div>
-										<h4 class="mb-1">
-											<?php
-											$tpendingOrder = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_order WHERE deleteStatus = 0");
-											echo @$tpendingOrder[0]['total'] ?: 0;
-											?>
-										</h4>
-										<p>Pending Order</p>
-									</div>
-									<span class="revenue-icon bg-indigo-transparent text-indigo">
-										<i class="fas fa-hourglass-half fs-16"></i>
-									</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
-					<a href="./pending-order-list.php" class="w-100">
+					<a href="./index.php?filter=true&dispatched_status=1" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
 								<div class="d-flex align-items-center justify-content-between">
@@ -135,7 +113,7 @@ deletefiveYearOld("aimo_warehouse");
 				</div>
 
 				<div class="col-xl-3 col-sm-6 col-12 d-flex">
-					<a href="./pending-order-list.php" class="w-100">
+					<a href="./index.php?filter=true&dispatched_status=0" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
 								<div class="d-flex align-items-center justify-content-between">
@@ -162,8 +140,7 @@ deletefiveYearOld("aimo_warehouse");
 		<div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4 class="fw-bold">Pending Order List</h4>
-                    <h6>Manage pending orders</h6>
+                    <h4 class="fw-bold">Order List</h4>
                 </div>
             </div>
             <ul class="table-top-head">
@@ -176,17 +153,16 @@ deletefiveYearOld("aimo_warehouse");
             <div class="am-page-upr-btn">
 			   <div class="left-btn">
                     <div class="page-btn">
-                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>New
-                            Pending orders</a>
+                        <a href="./pending-orders.php" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Create New Orders</a>
                     </div>
                     <div class="page-btn">
                         <?php if ($recycle) { ?>
-                            <a href="./pending-order-list.php" class="btn btn-secondary">
+                            <a href="./index.php" class="btn btn-secondary">
                                 <i data-feather="eye-off"></i>
                                 Hide Recycle Bin
                             </a>
                         <?php } else { ?>
-                            <a href="./pending-order-list.php?recycle=true" class="btn btn-danger">
+                            <a href="./index.php?recycle=true" class="btn btn-danger">
                                 <i data-feather="trash-2"></i>
                                 Show Recycle Bin
                             </a>
@@ -369,8 +345,8 @@ deletefiveYearOld("aimo_warehouse");
                                     ?>
                                     <tr>
                                         <td><?= $sr++; ?></td>
-                                        <td class="text-gray-9"><?= $action->db->indiandate($od['order_date']); ?></td>
-                                        <td class="text-gray-9"><?= $od['party_name']; ?></td>
+                                        <td class="text-gray-9"> <a href="./print-order.php?oid=<?= $od['id']; ?>"><?= $action->db->indiandate($od['order_date']); ?></a></td>
+                                        <td class="text-gray-9"><a href="./print-order.php?oid=<?= $od['id']; ?>"><?= $od['party_name']; ?></a></td>
                                         <td>
                                             <?php
                                             if ($od['status'] == 0) {

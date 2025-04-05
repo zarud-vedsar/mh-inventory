@@ -125,7 +125,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                             ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
-                                                <td><?= $itemName[0]['item_name']; ?> (<?= $itemName[0]['print_name']; ?>)</td>
+                                                <td><?= $itemName[0]['print_name']; ?></td>
                                                 <td><?= $d['item_qty']; ?></td>
                                                 <td>x</td>
                                                 <td><?= $d['item_kg']; ?></td>
