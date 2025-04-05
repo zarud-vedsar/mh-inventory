@@ -370,6 +370,53 @@ function show_delete(del_id, this_btn, table_name) {
   });
 }
 
+function show_delete_permanently(del_id, this_btn, table_name) {
+  swal({
+    title: "Are you sure?",
+    text: "want to delete this data permanently",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      let delete_table_permanently = "delete_table_permanently";
+      $.ajax({
+        url: path_set,
+        type: "POST",
+        data: { del_id: del_id, table_name: table_name, data: delete_table_permanently },
+        success: function (data) {
+          console.log(data)
+          let json7 = JSON.parse(data);
+          if (json7.status == 1) {
+            swaMsg("success", "Data deleted successfully.", "#0F843F");
+            if ($(this_btn).hasClass("delete-banner") || $(this_btn).hasClass("delete-gallery")) {
+              $(this_btn).closest(".col-md-3").remove();
+            }
+            else if ($(this_btn).hasClass("delete-faq")) {
+              $(this_btn).closest(".col-md-12").remove();
+            }
+            else if ($(this_btn).hasClass("delete-blend") || $(this_btn).hasClass("delete-leadcategory") || $(this_btn).hasClass("delete-packagingcategory")) {
+              $(this_btn).closest(".col-md-4").remove();
+            }
+            else if ($(this_btn).hasClass("delete-menu")) {
+              $(this_btn).closest(".dd-item").remove();
+            }
+            else {
+              $(this_btn).closest("tr").remove();
+            }
+          } else if (json7.status == 2) {
+            swaMsg("error", json7.msg, "#a90228");
+          }
+          else if (json7.status == 4) {
+            swaMsg("error", 'Sorry! You can not delete Yourself', "#a90228");
+          }
+        },
+      });
+    } else {
+    }
+  });
+}
+
 function delete_table(button_class, table_name_tb) {
   $(document).on("click", button_class, function (e) {
     e.preventDefault();
@@ -378,6 +425,16 @@ function delete_table(button_class, table_name_tb) {
     let table_name = table_name_tb;
     // alert(del_id);
     show_delete(del_id, this_btn, table_name);
+  });
+}
+function delete_table_permanently(button_class, table_name_tb) {
+  $(document).on("click", button_class, function (e) {
+    e.preventDefault();
+    let this_btn = $(this);
+    let del_id = $(this).data("delid");
+    let table_name = table_name_tb;
+    // alert(del_id);
+    show_delete_permanently(del_id, this_btn, table_name);
   });
 }
 function show_recycle(del_id, this_btn, table_name) {
