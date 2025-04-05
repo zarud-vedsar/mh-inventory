@@ -140,7 +140,7 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
 								$warehouseid = $action->db->validateGetData('warehouseid');
 								$sql .= " AND aimo_item.warehouseid = {$warehouseid}";
 							}
-							if (isset($_GET['coupon_point'])) {
+							if (isset($_GET['coupon_point']) && $_GET['coupon_point'] != '') {
 								$coupon_point = $_GET['coupon_point'];
 								$sql .= " AND aimo_item.coupon_point = {$coupon_point}";
 							}
