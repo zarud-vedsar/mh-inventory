@@ -167,6 +167,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                         <p class="total"><?= @$wname[0]['wtitle']; ?>: <strong><?= @$v; ?></strong></p>
                                         <?php
                                     }
+
                                 }
                                 ?>
                                 <p class="total"> Transport/Lorry No:
