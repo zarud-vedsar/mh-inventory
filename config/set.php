@@ -481,5 +481,45 @@ function pending_order_save()
     }
 }
 
+function reset_password_admin()
+{
+    global $action;
+
+    $old = $action->db->setPostRequiredField('old-password',"Please enter your old Password.");
+    $new = $action->db->setPostRequiredField('new-password',"Please enter your new Password.");
+    $cnf = $action->db->setPostRequiredField('confirm-password', "Please confirm your new Password.");
+
+    if (sha1($cnf) == sha1($new)) {
+        $pass_old = sha1($old);
+        if ($action->session->get("admin_id") != "") {
+            $id = $action->session->get("admin_id");
+
+            $select = $action->db->sql("SELECT * FROM aimo_users WHERE id = '{$id}' AND password = '{$pass_old}'");
+            if ($select) {
+                $update = $action->db->update('aimo_users', "id='{$id}'", ['password' => sha1($cnf)]);
+                if ($update) {
+                    echo $action->db->json(200, "Password Changed successfully.");
+                    http_response_code(200);
+                    return;
+                } else {
+                    echo $action->db->json(500, "Internal Server Error.");
+                    http_response_code(500);
+                    return;
+                }
+            } else {
+                echo $action->db->json(400, "Old Password that you have entered is incorrect.");
+                http_response_code(400);
+                return;
+            }
+        }
+    } else {
+        echo $action->db->json(400, "Both Password Should Match.");
+        http_response_code(400);
+        return;
+    }
+    
+
+}
+
 
 ?>

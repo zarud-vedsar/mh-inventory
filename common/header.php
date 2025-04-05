@@ -60,6 +60,15 @@ if (!$action->session->get("admin_id")) {
 							<p><?= @$user[0]['u_email']; ?></p>
 						</div>
 					</div>
+					<a href="change-password.php" class="dropdown-item d-block p-h-15 p-v-10">
+						<div class="d-flex align-items-center justify-content-between">
+							<div>
+								<i class="anticon opacity-04 font-size-16 anticon-unlock"></i>
+								<span class="m-l-10">Change Password</span>
+							</div>
+							<i class="anticon font-size-10 anticon-right"></i>
+						</div>
+					</a>
 					<hr class="my-2">
 					<a class="dropdown-item logout pb-0" id="logout" href="#"><i
 							class="ti ti-logout me-2"></i>Logout</a>

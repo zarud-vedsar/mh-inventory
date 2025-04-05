@@ -461,6 +461,56 @@ $(document).ready(function () {
       }
     });
   });
+
+  $(document).on("submit", "#reset_password_admin", function (e) {
+    e.preventDefault();
+    $("#sub_btn").prop('disabled', true);
+    formSubmit();
+    $('.error-span').text('');
+    const formData = new FormData(this);
+    formData.append('data', 'reset_password_admin');
+    $.ajax({
+      url: path_set,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache: false,
+      success: function (res) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+        try {
+          let json = JSON.parse(res);
+          if ([200, 201].includes(json.status)) {
+            if (json.status == 201) {
+              $("#reset_password_admin").trigger('reset');
+            }
+            swaMsg("success", json.msg, "#0F843F");
+          } else {
+            json.key && $(`.${json.key}`).text();
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred. Please try again.", "#FA5252");
+        }
+      },
+      error: function (jqXHR) {
+        $("#sub_btn").prop('disabled', false);
+        formStop();
+
+        try {
+          let json = JSON.parse(jqXHR.responseText);
+          console.log(json);
+          if ([400, 401, 500].includes(json.status)) {
+            json.key && $(`.${json.key}`).text(json.msg);
+            swaMsg("error", json.msg, "#FA5252");
+          }
+        } catch {
+          swaMsg("error", "An error occurred while submitting the form. Please try again later.", "#FA5252");
+        }
+      }
+    });
+  });
   // ! ||--------------------------------------------------------------------------------||
   // ! ||                             End Of Jquery           	                         ||
   // ! ||--------------------------------------------------------------------------------||
