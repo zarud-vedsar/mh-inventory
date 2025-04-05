@@ -57,6 +57,7 @@ $(document).ready(function () {
   checkbx_status(".checklist")
 
   delete_table('.delete-item-order', 5);
+  delete_table_permanently('.delete-item-order-permanently', 5);
   delete_recycle('.recover-item-order', 5);
   /*----------------------------------------------------------------------------
                 -- Widget Setting Show Or Hide --

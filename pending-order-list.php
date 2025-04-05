@@ -258,6 +258,10 @@ $recycle = $action->db->validateGetData('recycle') ?: null;
                                                         data-delid="<?= @$od['id']; ?>">
                                                         <i data-feather="refresh-ccw" class="feather-refresh-ccw text-success"></i>
                                                     </button>
+                                                    <button type="button" class="p-2 border-0 bg-transparent delete-item-order-permanently"
+                                                        data-delid="<?= @$od['id']; ?>">
+                                                        <i data-feather="trash-2" class="feather-trash-2 text-danger"></i>
+                                                    </button>
                                                 <?php } else { ?>
                                                     <button type="button" class="p-2 border-0 bg-transparent delete-item-order"
                                                         data-delid="<?= @$od['id']; ?>">

@@ -91,6 +91,32 @@ function delete_table()
         'msg' => $success ? "Record deleted successfully." : "An error occurred. Please try again later."
     ]);
 }
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                             DELETE DATA Permanently                            ||
+// ! ||--------------------------------------------------------------------------------||
+function delete_table_permanently()
+{
+    global $action;
+
+    $id = $action->db->sanitizeClientInput($_POST['del_id'] ?? '');
+    $table_code = $action->db->sanitizeClientInput($_POST['table_name'] ?? '');
+
+    if (!$id || !$table_code) {
+        echo json_encode(['status' => 2, 'msg' => "Invalid request."]);
+        return;
+    }
+
+    $table_name = $action->db->getTable($table_code);
+    $success = $action->db->deleteTableRow($table_name, $id);
+    print_r($success);
+    die;
+
+    echo json_encode([
+        'status' => $success ? 1 : 2,
+        'msg' => $success ? "Record deleted successfully." : "An error occurred. Please try again later."
+    ]);
+}
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                           RECOVERED DELETED DATA                               ||
 // ! ||--------------------------------------------------------------------------------||
