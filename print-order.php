@@ -8,6 +8,9 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
+    body{
+        background-color: #fff !important;
+    }
     #ai-table {
         width: 100%;
         border-collapse: collapse;
@@ -67,10 +70,20 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
         margin-top: 20px;
         margin-bottom: 0;
     }
+
+
+    @media print {
+        .hiddenprint {
+            display: none !important;
+        }
+        .page-wrapper{
+            background-color: white ;
+        }
+    }
 </style>
-<div class="page-wrapper bg-light w-100 p-0 m-0">
+<div class="page-wrapper bg-white w-100 p-0 m-0">
     <div class="row">
-        <div class="col-md-10 px-0 text-end">
+        <div class="col-md-10 px-0 text-end hiddenprint ">
             <!-- <button id="download" class="btn btn-primary">Download as PDF</button> -->
             <a href="#" class="btn btn-orange" id="print"><i class="fas fa-print me-1"></i> Print</a>
 
@@ -122,7 +135,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                             } else {
                                                 $items[$warehouseid] = $item_qty * $d['item_kg']; // Fix: Correct initialization
                                             }
-                                            ?>
+                                ?>
                                             <tr>
                                                 <td><?= $sr++; ?></td>
                                                 <td><?= $itemName[0]['print_name']; ?></td>
@@ -144,7 +157,7 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
 
                                                 </td>
                                             </tr>
-                                        <?php }
+                                <?php }
                                     }
                                 } ?>
                             </tbody>
@@ -163,11 +176,10 @@ if ($action->db->validateGetData('oid') && filter_var($action->db->validateGetDa
                                     $sr = 1;
                                     foreach ($items as $t => $v) {
                                         $wname = $action->db->sql("SELECT wtitle FROM aimo_warehouse WHERE id = {$t}");
-                                        ?>
+                                ?>
                                         <p class="total"><?= @$wname[0]['wtitle']; ?>: <strong><?= @$v; ?></strong></p>
-                                        <?php
+                                <?php
                                     }
-
                                 }
                                 ?>
                                 <p class="total"> Transport/Lorry No:
@@ -202,14 +214,16 @@ require_once('./common/footer.php');
             const element = document.getElementById('content');
             // console.log(element);
             const options = {
-                margin: [0.4, 0.6, 0.4, 0],  // Increase margins to avoid content getting cut
+                margin: [0.4, 0.6, 0.4, 0], // Increase margins to avoid content getting cut
                 jsPDF: {
-                    unit: 'in',  // Unit for the page size (inches)
-                    format: 'a4',  // Format for the document (A4 size)
-                    orientation: 'landscape',  // Orientation of the page (landscape)
+                    unit: 'in', // Unit for the page size (inches)
+                    format: 'a4', // Format for the document (A4 size)
+                    orientation: 'landscape', // Orientation of the page (landscape)
                     autoFirstPage: true, // Automatically add a first page if needed
                 },
-                pagebreak: { mode: ['css', 'legacy'] }, // Use both CSS and legacy methods for page breaks
+                pagebreak: {
+                    mode: ['css', 'legacy']
+                }, // Use both CSS and legacy methods for page breaks
             };
 
             html2pdf()
@@ -218,11 +232,11 @@ require_once('./common/footer.php');
                 .save('receipt-.pdf');
         });
     });
-    document.getElementById('print').addEventListener('click', function () {
+    document.getElementById('print').addEventListener('click', function() {
         window.print();
     });
 
-    document.getElementById('back').addEventListener('click', function () {
+    document.getElementById('back').addEventListener('click', function() {
         window.history.back();
     });
 </script>
