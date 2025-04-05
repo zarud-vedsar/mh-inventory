@@ -44,14 +44,17 @@ $(document).ready(function () {
   check_status(".dispatchstatus", 5);
   check_status(".off_warehouse", 2);
   delete_table('.delete-warehouse', 2);
+  delete_table_permanently('.delete-warehouse-permanently', 2);
   delete_recycle('.recover-warehouse', 2);
 
   check_status(".off_item", 3);
   delete_table('.delete-item', 3);
+  delete_table_permanently('.delete-item-permanently', 3);
   delete_recycle('.recover-item', 3);
 
   check_status(".off_party", 4);
   delete_table('.delete-party', 4);
+  delete_table_permanently('.delete-party-permanently', 4);
   delete_recycle('.recover-party', 4);
 
   checkbx_status(".checklist")

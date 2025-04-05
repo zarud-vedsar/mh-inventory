@@ -109,12 +109,12 @@ function delete_table_permanently()
 
     $table_name = $action->db->getTable($table_code);
     $success = $action->db->deleteTableRow($table_name, $id);
-    print_r($success);
-    die;
+    // $success = $action->db->sql("DELETE FROM {$table_name} WHERE id = '{$id}'");
+    
 
     echo json_encode([
         'status' => $success ? 1 : 2,
-        'msg' => $success ? "Record deleted successfully." : "An error occurred. Please try again later."
+        'msg' => $success ? "Record deleted Permanently." : "An error occurred. Please try again later."
     ]);
 }
 // ! ||--------------------------------------------------------------------------------||
