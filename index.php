@@ -21,7 +21,7 @@ deletefiveYearOld("aimo_warehouse");
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
+				<!--<div class="col-xl-3 col-sm-6 col-12 d-flex">
 					<a href="./warehouse.php" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
@@ -29,8 +29,8 @@ deletefiveYearOld("aimo_warehouse");
 									<div>
 										<h4 class="mb-1">
 											<?php
-											$twerehouse = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_warehouse WHERE deleteStatus = 0");
-											echo @$twerehouse[0]['total'] ?: 0;
+											//$twerehouse = $action->db->sql("SELECT COUNT(id) AS 'total' FROM aimo_warehouse WHERE deleteStatus = 0");
+											//echo @$twerehouse[0]['total'] ?: 0;
 											?>
 										</h4>
 										<p>Warehouse</p>
@@ -42,8 +42,8 @@ deletefiveYearOld("aimo_warehouse");
 							</div>
 						</div>
 					</a>
-				</div>
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
+				</div>--> 
+				<!--<div class="col-xl-3 col-sm-6 col-12 d-flex">
 					<a href="./product-list.php" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
@@ -51,8 +51,8 @@ deletefiveYearOld("aimo_warehouse");
 									<div>
 										<h4 class="mb-1">
 											<?php
-											$titem = $action->db->sql("SELECT COUNT(id) AS'total' FROM aimo_item WHERE deleteStatus = 0");
-											echo @$titem[0]['total'] ?: 0;
+											//$titem = $action->db->sql("SELECT COUNT(id) AS'total' FROM aimo_item WHERE deleteStatus = 0");
+											//echo @$titem[0]['total'] ?: 0;
 											?>
 										</h4>
 										<p>Item</p>
@@ -64,9 +64,9 @@ deletefiveYearOld("aimo_warehouse");
 							</div>
 						</div>
 					</a>
-				</div>
+				</div>--> 
 
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
+				<div class="col-xl-4 col-sm-6 col-12 d-flex">
 					<a href="./party-list.php" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
@@ -89,7 +89,7 @@ deletefiveYearOld("aimo_warehouse");
 					</a>
 				</div>
 
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
+				<div class="col-xl-4 col-sm-6 col-12 d-flex">
 					<a href="./index.php?filter=true&dispatched_status=1" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
@@ -112,7 +112,7 @@ deletefiveYearOld("aimo_warehouse");
 					</a>
 				</div>
 
-				<div class="col-xl-3 col-sm-6 col-12 d-flex">
+				<div class="col-xl-4 col-sm-6 col-12 d-flex">
 					<a href="./index.php?filter=true&dispatched_status=0" class="w-100">
 						<div class="card revenue-widget flex-fill">
 							<div class="card-body">
